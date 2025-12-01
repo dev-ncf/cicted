@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Registration; // Importa o nosso Model
 use Illuminate\Support\Facades\Validator; // Importa a Facade de Validação
  use App\Mail\EnviarEmail;
+ use Illuminate\Support\Facades\App; // CORRETO
+
 use Illuminate\Support\Facades\Mail;
 
 class RegistrationController extends Controller
@@ -18,23 +20,55 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
+        $locale = $request->get('lang'); // pega ?lang=pt ou default pt
+         App::setLocale($locale);
+
+        //  dd($locale);
         // 1. VALIDAÇÃO DOS DADOS
         // dd($request->all());
+         // 2. Mensagens personalizadas, condicionadas pelo locale
+        $messages = [
+            'full_names.required' => __('validation.full_names.required'),
+            'full_names.string' => __('validation.full_names.string'),
+            'full_names.max' => __('validation.full_names.max'),
+
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+
+            'tipo_participante.required' => __('validation.tipo_participante.required'),
+            'tipo_participante.in' => __('validation.tipo_participante.in'),
+
+            'presentation_modality.required_if' => __('validation.presentation_modality.required_if'),
+            'presentation_modality.in' => __('validation.presentation_modality.in'),
+
+            'thematic_axis.required_if' => __('validation.thematic_axis.required_if'),
+            'thematic_axis.in' => __('validation.thematic_axis.in'),
+
+            'abstract_content.required_if' => __('validation.abstract_content.required_if'),
+            'abstract_content.max' => __('validation.abstract_content.max'),
+
+            'keywords.required_if' => __('validation.keywords.required_if'),
+            'keywords.max' => __('validation.keywords.max'),
+
+            'resumo_file.required_if' => __('validation.resumo_file.required_if'),
+            'resumo_file.file' => __('validation.resumo_file.file'),
+            'resumo_file.mimes' => __('validation.resumo_file.mimes'),
+            'resumo_file.max' => __('validation.resumo_file.max'),
+        ];
+
+        // 3. Validação
         $validator = Validator::make($request->all(), [
             'full_names' => 'required|string|max:255',
-            'academic_level' => 'required|string|in:doutor,mestre,licenciado,medio',
-            'occupation' => 'required|string|in:estudante_graduacao,estudante_pos_graduacao,docente,investigador',
-            'institution_country' => 'required|string|max:255',
-            'tipo_participante' => 'required|string|in:orador,ouvinte',
             'email' => 'required|email',
+            'tipo_participante' => 'required|string|in:orador,ouvinte',
 
-            // Regras condicionais: só são obrigatórias se o participante for 'orador'
+            // Regras condicionais
             'presentation_modality' => 'required_if:tipo_participante,orador|string|in:mesa_redonda,comunicacao_oral,poster',
             'thematic_axis' => 'required_if:tipo_participante,orador|string|in:1,2,3,4,5,6',
-            'abstract_content' => 'required_if:tipo_participante,orador|string|max:5000|nullable', // max 5000 caracteres para o resumo
+            'abstract_content' => 'required_if:tipo_participante,orador|string|max:5000|nullable',
             'keywords' => 'required_if:tipo_participante,orador|string|max:255|nullable',
-            'resumo_file' => 'required_if:tipo_participante,orador|file|mimes:doc,docx|max:10240', // max 10MB (10 * 1024)
-        ]);
+            'resumo_file' => 'required_if:tipo_participante,orador|file|mimes:doc,docx|max:10240',
+        ], $messages);
 
         if ($validator->fails()) {
             return redirect()->back()

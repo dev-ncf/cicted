@@ -165,41 +165,41 @@ return [
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
-    'full_names.required' => 'The full name is required.',
-    'full_names.string' => 'The full name must be a string.',
-    'full_names.max' => 'The full name cannot exceed 255 characters.',
+    'full_names.required' => 'O nome completo é obrigatório.',
+        'full_names.string' => 'O nome completo deve ser uma string.',
+        'full_names.max' => 'O nome completo não pode ter mais de 255 caracteres.',
 
-    'academic_level.required' => 'The academic level is required.',
-    'academic_level.in' => 'The academic level must be doutor, mestre, licenciado, or medio.',
+        'academic_level.required' => 'O nível acadêmico é obrigatório.',
+        'academic_level.in' => 'O nível acadêmico deve ser doutor, mestre, licenciado ou medio.',
 
-    'occupation.required' => 'The occupation is required.',
-    'occupation.in' => 'The occupation must be estudante_graduacao, estudante_pos_graduacao, docente, or investigador.',
+        'occupation.required' => 'A ocupação é obrigatória.',
+        'occupation.in' => 'A ocupação deve ser estudante_graduacao, estudante_pos_graduacao, docente ou investigador.',
 
-    'institution_country.required' => 'The institution country is required.',
-    'institution_country.max' => 'The institution country cannot exceed 255 characters.',
+        'institution_country.required' => 'O país da instituição é obrigatório.',
+        'institution_country.max' => 'O país da instituição não pode ter mais de 255 caracteres.',
 
-    'tipo_participante.required' => 'The participant type is required.',
-    'tipo_participante.in' => 'The participant type must be orador or ouvinte.',
+        'tipo_participante.required' => 'O tipo de participante é obrigatório.',
+        'tipo_participante.in' => 'O tipo de participante deve ser orador ou ouvinte.',
 
-    'email.required' => 'The email is required.',
-    'email.email' => 'The email must be valid.',
+        'email.required' => 'O email é obrigatório.',
+        'email.email' => 'O email deve ser válido.',
 
-    'presentation_modality.required_if' => 'The presentation modality is required for speakers (oradores).',
-    'presentation_modality.in' => 'The modality must be mesa_redonda, comunicacao_oral, or poster.',
+        'presentation_modality.required_if' => 'A modalidade da apresentação é obrigatória para oradores.',
+        'presentation_modality.in' => 'A modalidade deve ser mesa_redonda, comunicacao_oral ou poster.',
 
-    'thematic_axis.required_if' => 'The thematic axis is required for speakers (oradores).',
-    'thematic_axis.in' => 'The thematic axis must be a number from 1 to 6.',
+        'thematic_axis.required_if' => 'O eixo temático é obrigatório para oradores.',
+        'thematic_axis.in' => 'O eixo temático deve ser um número de 1 a 6.',
 
-    'abstract_content.required_if' => 'The abstract content is required for speakers (oradores).',
-    'abstract_content.max' => 'The abstract content cannot exceed 5000 characters.',
+        'abstract_content.required_if' => 'O resumo é obrigatório para oradores.',
+        'abstract_content.max' => 'O resumo não pode exceder 5000 caracteres.',
 
-    'keywords.required_if' => 'The keywords are required for speakers (oradores).',
-    'keywords.max' => 'The keywords cannot exceed 255 characters.',
+        'keywords.required_if' => 'As palavras-chave são obrigatórias para oradores.',
+        'keywords.max' => 'As palavras-chave não podem exceder 255 caracteres.',
 
-    'resumo_file.required_if' => 'The abstract file is required for speakers (oradores).',
-    'resumo_file.file' => 'The abstract file must be a valid file.',
-    'resumo_file.mimes' => 'The abstract file must be of type DOC or DOCX.',
-    'resumo_file.max' => 'The abstract file cannot exceed 10MB.',
+        'resumo_file.required_if' => 'O arquivo de resumo é obrigatório para oradores.',
+        'resumo_file.file' => 'O arquivo de resumo deve ser um arquivo válido.',
+        'resumo_file.mimes' => 'O arquivo de resumo deve ser do tipo DOC ou DOCX.',
+        'resumo_file.max' => 'O arquivo de resumo não pode ter mais de 10MB.',
 
     /*
     |--------------------------------------------------------------------------

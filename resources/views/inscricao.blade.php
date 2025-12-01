@@ -87,6 +87,7 @@
                         @csrf
 
                         <!-- Nomes -->
+                        <input type="hidden" name="lang" value="{{ str_replace('_', '-', app()->getLocale()) }}">
                         <div>
                             <label for="autores" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.full_name') }} <span class="text-red-500">*</span></label>
                             <input type="text" id="autores" name="full_names" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>

@@ -165,41 +165,41 @@ return [
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
-    'full_names.required' => 'The full name is required.',
-    'full_names.string' => 'The full name must be a string.',
-    'full_names.max' => 'The full name cannot exceed 255 characters.',
+    'full_names.required' => 'Le nom complet est obligatoire.',
+    'full_names.string' => 'Le nom complet doit être une chaîne de caractères.',
+    'full_names.max' => 'Le nom complet ne peut pas dépasser 255 caractères.',
 
-    'academic_level.required' => 'The academic level is required.',
-    'academic_level.in' => 'The academic level must be doutor, mestre, licenciado, or medio.',
+    'academic_level.required' => 'Le niveau académique est obligatoire.',
+    'academic_level.in' => 'Le niveau académique doit être doutor, mestre, licenciado, ou medio.',
 
-    'occupation.required' => 'The occupation is required.',
-    'occupation.in' => 'The occupation must be estudante_graduacao, estudante_pos_graduacao, docente, or investigador.',
+    'occupation.required' => 'L\'occupation est obligatoire.',
+    'occupation.in' => 'L\'occupation doit être estudante_graduacao, estudante_pos_graduacao, docente, ou investigador.',
 
-    'institution_country.required' => 'The institution country is required.',
-    'institution_country.max' => 'The institution country cannot exceed 255 characters.',
+    'institution_country.required' => 'Le pays de l\'institution est obligatoire.',
+    'institution_country.max' => 'Le pays de l\'institution ne peut pas dépasser 255 caractères.',
 
-    'tipo_participante.required' => 'The participant type is required.',
-    'tipo_participante.in' => 'The participant type must be orador or ouvinte.',
+    'tipo_participante.required' => 'Le type de participant est obligatoire.',
+    'tipo_participante.in' => 'Le type de participant doit être orador ou ouvinte.',
 
-    'email.required' => 'The email is required.',
-    'email.email' => 'The email must be valid.',
+    'email.required' => 'L\'adresse e-mail est obligatoire.',
+    'email.email' => 'L\'adresse e-mail doit être valide.',
 
-    'presentation_modality.required_if' => 'The presentation modality is required for speakers (oradores).',
-    'presentation_modality.in' => 'The modality must be mesa_redonda, comunicacao_oral, or poster.',
+    'presentation_modality.required_if' => 'La modalité de présentation est obligatoire pour les orateurs.',
+    'presentation_modality.in' => 'La modalité doit être mesa_redonda, comunicacao_oral, ou poster.',
 
-    'thematic_axis.required_if' => 'The thematic axis is required for speakers (oradores).',
-    'thematic_axis.in' => 'The thematic axis must be a number from 1 to 6.',
+    'thematic_axis.required_if' => 'L\'axe thématique est obligatoire pour les orateurs.',
+    'thematic_axis.in' => 'L\'axe thématique doit être un numéro de 1 à 6.',
 
-    'abstract_content.required_if' => 'The abstract content is required for speakers (oradores).',
-    'abstract_content.max' => 'The abstract content cannot exceed 5000 characters.',
+    'abstract_content.required_if' => 'Le résumé est obligatoire pour les orateurs.',
+    'abstract_content.max' => 'Le résumé ne peut pas dépasser 5000 caractères.',
 
-    'keywords.required_if' => 'The keywords are required for speakers (oradores).',
-    'keywords.max' => 'The keywords cannot exceed 255 characters.',
+    'keywords.required_if' => 'Les mots-clés sont obligatoires pour les orateurs.',
+    'keywords.max' => 'Les mots-clés ne peuvent pas dépasser 255 caractères.',
 
-    'resumo_file.required_if' => 'The abstract file is required for speakers (oradores).',
-    'resumo_file.file' => 'The abstract file must be a valid file.',
-    'resumo_file.mimes' => 'The abstract file must be of type DOC or DOCX.',
-    'resumo_file.max' => 'The abstract file cannot exceed 10MB.',
+    'resumo_file.required_if' => 'Le fichier de résumé est obligatoire pour les orateurs.',
+    'resumo_file.file' => 'Le fichier de résumé doit être un fichier valide.',
+    'resumo_file.mimes' => 'Le fichier de résumé doit être de type DOC ou DOCX.',
+    'resumo_file.max' => 'Le fichier de résumé ne peut pas dépasser 10MB.',
 
     /*
     |--------------------------------------------------------------------------
@@ -212,23 +212,8 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-    ],
+    
+    
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Attributes
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used to swap our attribute placeholder
-    | with something more reader friendly such as "E-Mail Address" instead
-    | of "email". This simply helps us make our message more expressive.
-    |
-    */
-
-    'attributes' => [],
 
 ];
