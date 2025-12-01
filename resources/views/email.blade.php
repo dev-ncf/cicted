@@ -13,21 +13,17 @@
 <body>
 <div class="container">
     <p class="titulo">Confirmação de Inscrição – CICTED</p>
-    <p>Prezado(a)s <strong>{{ $categoria }}(es)</strong>,</p>
+    <p>Estimado(a)  <strong>pesquisador(a)</strong>,</p>
 
-    <p>A Secretaria do <strong>Congresso Internacional de Ciência, Tecnologia e Desenvolvimento (CICTED)</strong>, da <strong>Universidade Rovuma</strong>, confirma a validação da sua inscrição.</p>
+    <p>A Secretaria do <strong>Congresso Internacional de Ciência, Tecnologia e Desenvolvimento (CICTED)</strong>, da <strong>Universidade Rovuma</strong>, recebeu a sua inscrição.</p>
+         
 
     <div class="info">
-        <p><strong>Informações do Participante:</strong></p>
-        <p>📌 <strong>Nome:</strong> {{ $nome }}</p>
+        
+        <p>📌 Todos os inscritos no CICTED-2026, oradores e participantes sem comunicação devem  efectuar o pagamento de 30/03/2026  a 30/05/2026. </p>
     </div>
 
-    <p><strong>Próximos Passos:</strong></p>
-    <ul>
-        <li>Programação oficial</li>
-        <li>Informações aos participantes</li>
-        <li>Certificados e submissão de trabalhos (se aplicável)</li>
-    </ul>
+ 
 
     <p>📍 <strong>Local:</strong> Universidade Rovuma</p>
     <p>📅 <strong>Data:</strong> 16 e 17 de Setembro de 2026</p>
