@@ -28,12 +28,14 @@ return [
             'master' => 'Master',
             'bachelor' => 'Licence',
             'technician' => 'Niveau Moyen / Technique',
+            'outher' => 'Autre',
         ],
         'occupation' => [
             'ug_student' => 'Étudiant de premier cycle',
             'pg_student' => 'Étudiant de troisième cycle',
             'lecturer' => 'Enseignant',
             'researcher' => 'Chercheur',
+            'outher' => 'Autre',
         ],
         'participant_type' => [
             'speaker' => 'Intervenant',

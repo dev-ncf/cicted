@@ -128,6 +128,12 @@
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.level.technician') }}</span>
                                     </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="academic_level" value="medio" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.level.outher') }}</span>
+                                    </label>
                                 </div>
                             </fieldset>
 
@@ -158,6 +164,13 @@
                                             <input type="radio" name="occupation" value="investigador" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.occupation.researcher') }}</span>
+                                    </label>
+                                    </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="occupation" value="investigador" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.occupation.outher') }}</span>
                                     </label>
                                 </div>
                             </fieldset>

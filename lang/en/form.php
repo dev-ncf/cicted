@@ -28,12 +28,14 @@ return [
             'master' => 'Master\'s',
             'bachelor' => 'Bachelor\'s',
             'technician' => 'Technician/Associate',
+            'outher' => 'Outher',
         ],
         'occupation' => [
             'ug_student' => 'Undergraduate student',
             'pg_student' => 'Postgraduate student',
             'lecturer' => 'Lecturer',
             'researcher' => 'Researcher',
+            'outher' => 'Outher',
         ],
         'participant_type' => [
             'speaker' => 'Speaker',
