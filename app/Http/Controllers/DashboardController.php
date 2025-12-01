@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Registration; // Não se esqueça de importar o seu Model
+use App\Models\User; // Não se esqueça de importar o seu Model
+use App\Http\Controllers\Storage;
+
 
 class DashboardController extends Controller
 {
@@ -25,9 +28,24 @@ class DashboardController extends Controller
         $registrations = Registration::latest()->paginate(15);
 
         // --- 3. Enviar os Dados para a View ---
+        $users = User::all();
         return view('dashboard', [
             'stats' => $stats,
-            'registrations' => $registrations
+            'registrations' => $registrations,
+            'users' => $users
         ]);
     }
+    public function destroyRegistration($id)
+{
+    $registration = Registration::findOrFail($id);
+    
+    // Se tiver ficheiro, apagar do disco
+    if ($registration->abstract_filepath) {
+        Storage::disk('public')->delete($registration->abstract_filepath);
+    }
+    
+    $registration->delete();
+    
+    return back()->with('success', 'Inscrição eliminada com sucesso!');
+}
 }

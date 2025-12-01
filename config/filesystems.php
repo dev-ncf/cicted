@@ -40,8 +40,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => public_path('app/public'),
-            'url' => env('APP_URL').'/public',
+            'root' => public_path(''),
+            'url' => env('APP_URL').'',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

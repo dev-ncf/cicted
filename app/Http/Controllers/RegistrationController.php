@@ -32,6 +32,12 @@ class RegistrationController extends Controller
             'full_names.string' => __('validation.full_names.string'),
             'full_names.max' => __('validation.full_names.max'),
 
+             'academic_level.required' => __('validation.academic_level_required'),
+            'academic_level.in' => __('validation.academic_level_in'),
+
+             'occupation.required' => __('validation.occupation_required'),
+            'occupation.in' => __('validation.occupation_in'),
+
             'email.required' => __('validation.email.required'),
             'email.email' => __('validation.email.email'),
 
@@ -59,10 +65,13 @@ class RegistrationController extends Controller
         // 3. Validação
         $validator = Validator::make($request->all(), [
             'full_names' => 'required|string|max:255',
-            'email' => 'required|email',
+            'academic_level' => 'required|string|in:doutor,mestre,licenciado,medio',
+            'occupation' => 'required|string|in:estudante_graduacao,estudante_pos_graduacao,docente,investigador',
+            'institution_country' => 'required|string|max:255',
             'tipo_participante' => 'required|string|in:orador,ouvinte',
+            'email' => 'required|email',
 
-            // Regras condicionais
+            // Campos condicionais para oradores
             'presentation_modality' => 'required_if:tipo_participante,orador|string|in:mesa_redonda,comunicacao_oral,poster',
             'thematic_axis' => 'required_if:tipo_participante,orador|string|in:1,2,3,4,5,6',
             'abstract_content' => 'required_if:tipo_participante,orador|string|max:5000|nullable',

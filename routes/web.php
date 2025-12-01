@@ -6,6 +6,19 @@ use App\Http\Middleware\SetLocale; // <-- 1. Importe o middleware aqui
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UserController;
+
+Route::middleware(['auth'])->group(function () {
+    // Dashboard principal
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Rotas para Gerir Inscrições (Apagar)
+    Route::delete('/registrations/{id}', [DashboardController::class, 'destroyRegistration'])->name('registration.destroy');
+    
+    // Rotas para Gerir Utilizadores (Criar, Listar, Apagar)
+    Route::resource('users', UserController::class);
+    Route::post('/usuarios', [UserController::class, 'store'])->name('users.store');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +65,3 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 // Rota do Dashboard PROTEGIDA
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware('auth') // <- A MAGIA ESTÁ AQUI
-    ->name('dashboard');
