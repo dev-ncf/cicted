@@ -46,10 +46,10 @@
             <div class="flex justify-between items-center">
                 <!-- Logo e Título -->
                 <div class="flex items-center space-x-3">
-                    <img src="{{ asset('img/logo.jpg') }}" alt="Logotipo UniRovuma" class="h-10 md:h-14 rounded-full">
+                    <img src="{{ asset('img/logotipo-unirovuma.fw.png') }}" alt="Logotipo UniRovuma" class="h-10 md:h-14 rounded-full">
                     <div class="flex flex-col leading-tight">
-                        <p class="text-unirovuma-gold font-bold text-xs md:text-base">UNIVERSIDADE ROVUMA</p>
-                        <p class="text-white text-[10px] md:text-sm">DIRECÇÃO CIENTÍFICA</p>
+                        <p class="text-unirovuma-gold font-bold text-xs md:text-base">UNIVERSIDADE </p>
+                        <p class="text-white text-[10px] md:text-sm">ROVUMA</p>
                     </div>
                 </div>
 
