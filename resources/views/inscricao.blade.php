@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('form.title') }}</title>
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+  
     <link rel="shortcut icon" href="{{ asset('img/logotipo-unirovuma.fw.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Configuração Personalizada do Tailwind -->
+    
     <script>
         tailwind.config = {
             theme: {
@@ -35,16 +33,13 @@
     </script>
 </head>
 <body class="bg-gray-50 font-lato text-gray-800 antialiased flex flex-col min-h-screen">
-
-    <!-- ===== HEADER SIMPLES ===== -->
     <header class="bg-unirovuma-blue shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
             <div>
-                <!-- Logo ajustável -->
+              
                 <img src="{{ asset('img/logo.jpg') }}" alt="Logotipo UniRovuma" class="h-10 md:h-14 rounded-full border border-white/20">
             </div>
             <a href="/{{ app()->getLocale() }}" class="text-white hover:text-unirovuma-gold font-semibold text-sm md:text-base flex items-center gap-2 transition-colors">
-                <!-- Ícone de seta para voltar (opcional, ajuda na UX mobile) -->
              
                 {{ __('form.header.back_link') }}
             </a>
@@ -54,13 +49,11 @@
     <main class="flex-grow py-10 md:py-20">
         <div class="container mx-auto px-4 md:px-6">
             <div class="max-w-4xl mx-auto">
-                <!-- Cabeçalho do Formulário -->
                 <div class="text-center mb-8 md:mb-12">
                     <h1 class="font-poppins text-2xl md:text-4xl font-bold text-unirovuma-blue leading-tight">{{ __('form.main_title') }}</h1>
                     <p class="text-base md:text-lg text-gray-600 mt-3 px-2">{{ __('form.description') }}</p>
                 </div>
                 
-                <!-- Área de Mensagens (Sucesso/Erro) -->
                 <div class="text-center mb-8 md:mb-12">
                     @if (session('success'))
                         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-8 rounded-md text-left shadow-sm" role="alert">
@@ -80,28 +73,22 @@
                         </div>
                     @endif
                 </div>
-
-                <!-- Card do Formulário -->
                 <div class="bg-white rounded-xl shadow-xl p-6 md:p-12 border-t-4 border-unirovuma-gold">
                     <form action="{{ route('registration.store', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" class="space-y-6 md:space-y-8">
                         @csrf
 
-                        <!-- Nomes -->
                         <input type="hidden" name="lang" value="{{ str_replace('_', '-', app()->getLocale()) }}">
                         <div>
                             <label for="autores" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.full_name') }} <span class="text-red-500">*</span></label>
                             <input type="text" id="autores" name="full_names" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>
                         </div>
                         
-                        <!-- Email -->
                         <div>
                             <label for="email" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.email') }} <span class="text-red-500">*</span></label>
                             <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>
                         </div>
 
-                        <!-- Grid para Nível Académico e Ocupação (Lado a lado em desktop) -->
                         <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-                            <!-- Nível Académico -->
                             <fieldset class="bg-gray-50 p-4 rounded-lg">
                                 <legend class="font-poppins font-semibold text-unirovuma-blue-dark mb-3 text-sm md:text-base">{{ __('form.labels.academic_level') }} <span class="text-red-500">*</span></legend>
                                 <div class="space-y-3">
@@ -138,7 +125,6 @@
                                 </div>
                             </fieldset>
 
-                            <!-- Ocupação -->
                             <fieldset class="bg-gray-50 p-4 rounded-lg">
                                 <legend class="font-poppins font-semibold text-unirovuma-blue-dark mb-3 text-sm md:text-base">{{ __('form.labels.occupation') }} <span class="text-red-500">*</span></legend>
                                 <div class="space-y-3">
@@ -177,13 +163,11 @@
                             </fieldset>
                         </div>
 
-                        <!-- Instituição e País -->
                         <div>
                             <label for="instituicao" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.institution') }} <span class="text-red-500">*</span></label>
                             <input type="text" id="instituicao" name="institution_country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>
                         </div>
                         
-                        <!-- Tipo de Participante -->
                         <fieldset class="bg-gray-50 p-4 rounded-lg">
                             <legend class="font-poppins font-semibold text-unirovuma-blue-dark mb-3 text-sm md:text-base">{{ __('form.labels.participant_type') }} <span class="text-red-500">*</span></legend>
                             <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
@@ -198,7 +182,6 @@
                             </div>
                         </fieldset>
 
-                        <!-- Campos Condicionais para Orador -->
                         <div id="campos-orador" class="hidden space-y-6 md:space-y-8 border-t-2 border-dashed border-gray-200 pt-8 animate-fade-in-down">
                             
                             <fieldset>
@@ -290,13 +273,10 @@
        </div>
     </footer>
 
-    <script>
+   <script >
         document.addEventListener('DOMContentLoaded', function() {
-            // Lógica de mostrar/ocultar campos
             const tipoParticipanteRadios = document.querySelectorAll('input[name="tipo_participante"]');
             const camposOrador = document.getElementById('campos-orador');
-            
-            // Função para verificar estado inicial (caso o browser lembre a seleção no refresh)
             function checkSpeakerFields() {
                 const selected = document.querySelector('input[name="tipo_participante"]:checked');
                 if (selected && selected.value === 'orador') {
@@ -306,18 +286,14 @@
                 }
             }
             
-            // Verifica no carregamento
             checkSpeakerFields();
 
-            // Adiciona listeners
             tipoParticipanteRadios.forEach(radio => {
                 radio.addEventListener('change', checkSpeakerFields);
             });
 
-            // Lógica do Upload de Arquivo
             const fileInput = document.getElementById('resumo_file');
             const filenameDisplay = document.getElementById('filename');
-            // Fallback caso a string de tradução não seja carregada pelo blade
             const fileSelectedPrefix = "{{ __('form.file_upload.selected_prefix') ?? 'Arquivo selecionado:' }}";
             
             if(fileInput) {
@@ -331,7 +307,6 @@
                     }
                 });
             }
-        });
-    </script>
+        });</script>
 </body>
 </html>

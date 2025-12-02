@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-{{-- A função app()->getLocale() obtém o idioma ativo (pt, en, fr) --}}
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('welcome.hero.title') }} - UniRovuma</title>
 
-    <!-- Tailwind CSS CDN -->
+ 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
+  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('img/logotipo-unirovuma.fw.png') }}" type="image/x-icon">
     
-    <!-- Configuração Personalizada do Tailwind -->
+ 
     <script>
         tailwind.config = {
             theme: {
@@ -30,30 +29,37 @@
                         'unirovuma-gold': '#F2B900',
                         'unirovuma-gold-dark': '#D9A400',
                     },
-                    backgroundImage: {
-                        'hero-pattern': "url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
-                    }
+                    
                 }
             }
         }
     </script>
+    <style>
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+</style>
 </head>
 <body class="bg-white font-lato text-gray-800 antialiased flex flex-col min-h-screen">
 
-    <!-- ===== HEADER ===== -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-4 md:px-6 py-4">
             <div class="flex justify-between items-center">
-                <!-- Logo e Título -->
                 <div class="flex items-center space-x-3">
                     <img src="{{ asset('img/logotipo-unirovuma.fw.png') }}" alt="Logotipo UniRovuma" class="h-10 md:h-14 rounded-full">
                     <div class="flex flex-col leading-tight">
-                        <p class="text-unirovuma-gold font-bold text-xs md:text-base">UNIVERSIDADE </p>
-                        <p class="text-white text-[10px] md:text-sm">ROVUMA</p>
+                        <p class="text-unirovuma-gold font-bold text-sm md:text-base">UNIVERSIDADE </p>
+                        <p class="text-white text-[10px] md:text-lg">ROVUMA</p>
                     </div>
                 </div>
 
-                <!-- Menu Desktop -->
                 <div class="hidden lg:flex items-center space-x-8 text-white font-semibold">
                     <a href="#objetivos" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.objectives') }}</a>
                     <a href="#temas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.themes') }}</a>
@@ -61,9 +67,8 @@
                     <a href="{{ route('login') }}" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.login') }}</a>
                 </div>
 
-                <!-- Idiomas e Menu Mobile Toggle -->
+                
                 <div class="flex items-center space-x-4">
-                    <!-- Seletor de Idioma -->
                     <div class="flex items-center space-x-2 text-white font-bold text-sm md:text-base">
                         <a href="/pt" class="{{ app()->getLocale() == 'pt' ? 'text-unirovuma-gold' : 'hover:text-unirovuma-gold transition-colors' }}">PT</a>
                         <span class="text-gray-400">|</span>
@@ -72,16 +77,13 @@
                         <a href="/fr" class="{{ app()->getLocale() == 'fr' ? 'text-unirovuma-gold' : 'hover:text-unirovuma-gold transition-colors' }}">FR</a>
                     </div>
 
-                    <!-- Botão Menu Mobile (Hamburger) -->
                     <button id="mobile-menu-btn" class="lg:hidden text-white focus:outline-none">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
+                       <img src="{{ asset('img/icons/hamburger.png') }}" alt="" style="width: 24px" >
                     </button>
                 </div>
             </div>
 
-            <!-- Menu Mobile (Hidden by default) -->
+           
             <div id="mobile-menu" class="hidden lg:hidden mt-4 bg-unirovuma-blue-dark rounded-lg p-4 absolute left-4 right-4 shadow-xl border-t border-gray-700">
                 <div class="flex flex-col space-y-4 text-white font-semibold text-center">
                     <a href="#objetivos" class="mobile-link hover:text-unirovuma-gold">{{ __('welcome.nav.objectives') }}</a>
@@ -94,21 +96,15 @@
     </header>
 
     <main class="flex-grow">
-
-        <!-- ===== CAROUSEL HERO SECTION ===== -->
 <section id="hero-carousel" class="relative h-screen min-h-[600px] overflow-hidden group">
     
-    <!-- Slides Container -->
     <div id="carousel-slides" class="relative h-full w-full">
         
-        <!-- SLIDE 1: Boas-vindas (Conteúdo Original) -->
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10" data-slide="0">
-            <!-- Imagem de Fundo -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1920&auto=format&fit=crop');"></div>
-            <!-- Sobreposição Azul -->
-            <div class="absolute inset-0 bg-unirovuma-blue/85"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/reitoria.jpg') }}');"></div>
             
-            <!-- Conteúdo -->
+            <div class="absolute inset-0 bg-unirovuma-blue/60"></div>
+          
             <div class="relative h-full flex items-center justify-center text-center text-white px-6">
                 <div class="max-w-4xl mx-auto mt-16 md:mt-0">
                     <span class="font-semibold text-unirovuma-gold tracking-widest uppercase text-sm md:text-base animate-fade-in-up">{{ __('welcome.hero.location_date') }}</span>
@@ -130,10 +126,9 @@
             </div>
         </div>
 
-        <!-- SLIDE 2: Chamada para Trabalhos (Exemplo) -->
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="1">
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/campus_napipine.jpg') }}');"></div>
-            <div class="absolute inset-0 bg-unirovuma-blue-dark/80"></div>
+            <div class="absolute inset-0 bg-unirovuma-blue-dark/50"></div>
             
             <div class="relative h-full flex items-center justify-center text-center text-white px-6">
                 <div class="max-w-4xl mx-auto mt-16 md:mt-0">
@@ -154,11 +149,10 @@
         </div>
         
 
-        <!-- SLIDE 3: Turismo / Localização (Exemplo) -->
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="2">
-            <!-- Imagem de Lichinga ou Niassa -->
+            
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/Centro Cultural da Universidade Rovuma(1).jpg') }}');"></div>
-            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute inset-0 bg-black/50"></div>
             
             <div class="relative h-full flex items-center justify-center text-center text-white px-6">
                 <div class="max-w-4xl mx-auto mt-16 md:mt-0">
@@ -172,32 +166,10 @@
                 </div>
             </div>
         </div>
-        <!-- SLIDE 4: Chamada para Trabalhos (Exemplo) -->
-        {{-- <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="3">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/campus_napipine.jpg') }}');"></div>
-            <div class="absolute inset-0 bg-unirovuma-blue-dark/80"></div>
-            
-            <div class="relative h-full flex items-center justify-center text-center text-white px-6">
-                <div class="max-w-4xl mx-auto mt-16 md:mt-0">
-                    <span class="font-semibold text-unirovuma-gold tracking-widest uppercase text-sm md:text-base">Submissão de Resumos</span>
-                    <h1 class="font-poppins text-3xl md:text-5xl font-extrabold tracking-tight uppercase mt-4 mb-6 leading-tight">
-                        Partilhe a sua Ciência
-                    </h1>
-                    <p class="text-lg md:text-xl font-light text-gray-200 mb-10 max-w-3xl mx-auto">
-                        Convidados investigadores, docentes e estudantes a submeterem os seus trabalhos nas diversas áreas temáticas do congresso.
-                    </p>
-                    <div class="flex flex-col md:flex-row gap-4 justify-center">
-                        <a href="{{ asset('docs/TdR Resumido_Congresso UniRovuma_página web_30.10.2025.pdf') }}" target="_blank" class="bg-white text-unirovuma-blue font-poppins font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:bg-unirovuma-gold hover:text-unirovuma-blue-dark hover:scale-105 transition-all duration-300">
-                            Ler Termos de Referência
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        
 
     </div>
 
-    <!-- Controls (Prev/Next) -->
     <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 hover:bg-unirovuma-gold text-white hover:text-unirovuma-blue-dark p-3 rounded-full backdrop-blur-sm transition-all z-20 hidden md:block focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -209,21 +181,18 @@
         </svg>
     </button>
 
-    <!-- Indicators (Dots) -->
     <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-20">
         <button class="indicator w-3 h-3 rounded-full bg-white transition-all duration-300 focus:outline-none" data-index="0"></button>
         <button class="indicator w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-all duration-300 focus:outline-none" data-index="1"></button>
         <button class="indicator w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-all duration-300 focus:outline-none" data-index="2"></button>
-        {{-- <button class="indicator w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-all duration-300 focus:outline-none" data-index="3"></button> --}}
     </div>
 </section>
 
-        <!-- ===== SEÇÃO OBJETIVOS ===== -->
         <section id="objetivos" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4 md:px-6">
                 <h2 class="font-poppins text-2xl md:text-4xl font-bold text-unirovuma-blue mb-10 md:mb-16 text-center">{{ __('welcome.objectives.title') }}</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
-                    <!-- Cards -->
+                   
                     <div class="bg-gray-50 p-6 rounded-xl border-t-4 border-unirovuma-gold shadow-sm hover:shadow-md transition-shadow">
                         <h3 class="font-poppins font-bold text-lg text-unirovuma-blue-dark mb-3">{{ __('welcome.objectives.item1_title') }}</h3>
                         <p class="text-sm md:text-base text-gray-600 leading-relaxed">{{ __('welcome.objectives.item1_desc') }}</p>
@@ -244,7 +213,6 @@
             </div>
         </section>
 
-        <!-- ===== SEÇÃO ÁREAS TEMÁTICAS ===== -->
         <section id="temas" class="py-16 md:py-24 bg-gray-50">
             <div class="container mx-auto px-4 md:px-6">
                 <h2 class="font-poppins text-2xl md:text-4xl font-bold text-unirovuma-blue mb-10 md:mb-16 text-center">{{ __('welcome.themes.title') }}</h2>
@@ -259,13 +227,11 @@
             </div>
         </section>
         
-        <!-- ===== SEÇÃO DATAS IMPORTANTES ===== -->
         <section id="datas" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4 md:px-6 max-w-4xl">
                 <h2 class="font-poppins text-2xl md:text-4xl font-bold text-unirovuma-blue mb-12 text-center">{{ __('welcome.dates.title') }}</h2>
                 <div class="relative border-l-2 border-gray-200 ml-4 md:ml-6 space-y-10">
                     
-                    <!-- Item Data -->
                     <div class="pl-8 relative group">
                         <div class="absolute -left-[9px] top-1 w-5 h-5 bg-unirovuma-gold rounded-full border-4 border-white shadow-sm group-hover:scale-125 transition-transform"></div>
                         <p class="font-poppins font-bold text-unirovuma-blue-dark text-lg md:text-xl">15/11/2025</p>
@@ -299,13 +265,11 @@
             </div>
         </section>
 
-        <!-- ===== SEÇÃO DE INSCRIÇÃO ===== -->
         <section id="inscricao" class="py-16 md:py-24 bg-gray-50">
             <div class="container mx-auto px-4 md:px-6">
                 <h2 class="font-poppins text-2xl md:text-4xl font-bold text-unirovuma-blue mb-4 text-center">{{ __('welcome.registration.title') }}</h2>
                 <p class="text-base md:text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto">{{ __('welcome.registration.description') }}</p>
                 
-                <!-- Wrapper responsivo para tabela -->
                 <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left min-w-[500px]">
@@ -354,7 +318,6 @@
         </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="bg-unirovuma-blue-dark text-white pt-16 pb-8 border-t border-gray-800">
         <div class="container mx-auto px-4 md:px-6">
             <div class="grid md:grid-cols-3 gap-10 mb-10 text-center md:text-left">
@@ -393,9 +356,7 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // Header Change on Scroll
         const header = document.getElementById('header');
         window.onscroll = function() {
             if (window.pageYOffset > 20) {
@@ -405,7 +366,6 @@
             }
         };
 
-        // Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const links = document.querySelectorAll('.mobile-link');
@@ -414,15 +374,12 @@
             menu.classList.toggle('hidden');
         });
 
-        // Close menu when clicking a link
         links.forEach(link => {
             link.addEventListener('click', () => {
                 menu.classList.add('hidden');
             });
         });
-    </script>
-    <!-- Script do Carousel -->
-<script>
+    
     document.addEventListener('DOMContentLoaded', function() {
         const slides = document.querySelectorAll('[data-slide]');
         const indicators = document.querySelectorAll('.indicator');
@@ -430,15 +387,14 @@
         const nextBtn = document.getElementById('nextBtn');
         let currentIndex = 0;
         let interval;
-        const intervalTime = 6000; // 6 segundos por slide
+        const intervalTime = 6000; 
 
         function showSlide(index) {
-            // Garante loop infinito
             if (index >= slides.length) currentIndex = 0;
             else if (index < 0) currentIndex = slides.length - 1;
             else currentIndex = index;
 
-            // Atualiza Slides (Fade Effect)
+            
             slides.forEach((slide, i) => {
                 if (i === currentIndex) {
                     slide.classList.remove('opacity-0', 'z-0');
@@ -449,11 +405,11 @@
                 }
             });
 
-            // Atualiza Indicadores
+            
             indicators.forEach((dot, i) => {
                 if (i === currentIndex) {
                     dot.classList.remove('bg-white/40');
-                    dot.classList.add('bg-unirovuma-gold', 'w-8'); // Ativo fica dourado e mais largo
+                    dot.classList.add('bg-unirovuma-gold', 'w-8'); 
                 } else {
                     dot.classList.remove('bg-unirovuma-gold', 'w-8');
                     dot.classList.add('bg-white/40');
@@ -477,7 +433,6 @@
             clearInterval(interval);
         }
 
-        // Event Listeners
         if(nextBtn) nextBtn.addEventListener('click', () => {
             stopAutoPlay();
             nextSlide();
@@ -499,24 +454,11 @@
             });
         });
 
-        // Inicializa
         showSlide(0);
         startAutoPlay();
     });
 </script>
 
-<!-- Adicionar no <head> se quiser animações extras de entrada -->
-<style>
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
-    }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-</style>
+
 </body>
 </html>
