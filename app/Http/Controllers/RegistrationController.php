@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Registration; // Importa o nosso Model
+use App\Models\User; // Importa o nosso Model
 use Illuminate\Support\Facades\Validator; // Importa a Facade de Validação
  use App\Mail\EnviarEmail;
  use Illuminate\Support\Facades\App; // CORRETO

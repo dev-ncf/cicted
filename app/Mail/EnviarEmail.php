@@ -14,6 +14,8 @@ class EnviarEmail extends Mailable
     use Queueable, SerializesModels;
     public $nome;
     public $categoria;
+    public $email;
+    public $senha;
 
     /**
      * Create a new message instance.
