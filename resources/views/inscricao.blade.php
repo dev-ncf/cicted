@@ -165,7 +165,11 @@
 
                         <div>
                             <label for="instituicao" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.institution') }} <span class="text-red-500">*</span></label>
-                            <input type="text" id="instituicao" name="institution_country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>
+                            <input type="text" id="instituicao" name="institution" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>
+                        </div>
+                        <div>
+                            <label for="pais" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.country') }} <span class="text-red-500">*</span></label>
+                            <input type="text" id="instituicao" name="country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all" required>
                         </div>
                         
                         <fieldset class="bg-gray-50 p-4 rounded-lg">

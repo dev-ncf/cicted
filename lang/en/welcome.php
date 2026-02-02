@@ -3,11 +3,20 @@
 return [
     // Header & Navigation
     'nav' => [
-        'objectives' => 'Objectives',
-        'themes' => 'Thematic Areas',
-        'dates' => 'Dates',
-        'registration' => 'Registration',
-        'login' => 'Login',
+        'modalities' => 'Modalities',
+        'program' => 'Program',
+        'authors' => [
+            'instruction-a'=>'Instruções para correcção de Resumos',
+            'instruction-b'=>'Instruções para apresentação de comunicações nas sessões paralelas',
+            'instruction-c'=>'Chamada para submissão de resumos',
+            'instruction-d'=>'DESCRIÇÃO DAS ÁREAS TEMÁTICAS',
+            'instruction-e'=>'Instruções aos Autores',
+            'instruction-f'=>'Instruções para submissão na Revista Cientifica da UEM',
+        ],
+        'enrollment' => 'Enroolment',
+        'abstract_books' => 'Livros de resumos',
+        'ebooks' => 'E-Books',
+        'login' => 'Sign-in',
     ],
 
     // Hero Section

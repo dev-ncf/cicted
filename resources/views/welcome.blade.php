@@ -61,9 +61,12 @@
                 </div>
 
                 <div class="hidden lg:flex items-center space-x-8 text-white font-semibold">
-                    <a href="#objetivos" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.objectives') }}</a>
-                    <a href="#temas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.themes') }}</a>
-                    <a href="#datas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.dates') }}</a>
+                    <a href="#objetivos" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.modalities') }}</a>
+                    <a href="#temas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.program') }}</a>
+                    <a href="#temas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.program') }}</a>
+                    <a href="{{ route('registration.form') }}" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.enrollment') }}</a>
+                    <a href="#datas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.abstract_books') }}</a>
+                    <a href="#datas" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.ebooks') }}</a>
                     <a href="{{ route('login') }}" class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.login') }}</a>
                 </div>
 
@@ -99,6 +102,27 @@
 <section id="hero-carousel" class="relative h-screen min-h-[600px] overflow-hidden group">
     
     <div id="carousel-slides" class="relative h-full w-full">
+        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="1">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/campus_napipine.jpg') }}');"></div>
+            <div class="absolute inset-0 bg-unirovuma-blue-dark/50"></div>
+            
+            <div class="relative h-full flex items-center justify-center text-center text-white px-6">
+                <div class="max-w-4xl mx-auto mt-16 md:mt-0">
+                    <span class="font-semibold text-unirovuma-gold tracking-widest uppercase text-sm md:text-base"> {{ __('welcome.submit.submissao') }}</span>
+                    <h1 class="font-poppins text-3xl md:text-5xl font-extrabold tracking-tight uppercase mt-4 mb-6 leading-tight">
+                        {{ __('welcome.submit.partilhe') }}
+                    </h1>
+                    <p class="text-lg md:text-xl font-light text-gray-200 mb-10 max-w-3xl mx-auto">
+                        {{ __('welcome.submit.paragrafo') }}
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        <a href="{{ asset('docs/TdR Resumido_Congresso UniRovuma_página web_30.10.2025.pdf') }}" target="_blank" class="bg-white text-unirovuma-blue font-poppins font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:bg-unirovuma-gold hover:text-unirovuma-blue-dark hover:scale-105 transition-all duration-300">
+                            {{ __('welcome.submit.termo') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10" data-slide="0">
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/reitoria.jpg') }}');"></div>
@@ -126,27 +150,7 @@
             </div>
         </div>
 
-        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="1">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('img/campus_napipine.jpg') }}');"></div>
-            <div class="absolute inset-0 bg-unirovuma-blue-dark/50"></div>
-            
-            <div class="relative h-full flex items-center justify-center text-center text-white px-6">
-                <div class="max-w-4xl mx-auto mt-16 md:mt-0">
-                    <span class="font-semibold text-unirovuma-gold tracking-widest uppercase text-sm md:text-base"> {{ __('welcome.submit.submissao') }}</span>
-                    <h1 class="font-poppins text-3xl md:text-5xl font-extrabold tracking-tight uppercase mt-4 mb-6 leading-tight">
-                        {{ __('welcome.submit.partilhe') }}
-                    </h1>
-                    <p class="text-lg md:text-xl font-light text-gray-200 mb-10 max-w-3xl mx-auto">
-                        {{ __('welcome.submit.paragrafo') }}
-                    </p>
-                    <div class="flex flex-col md:flex-row gap-4 justify-center">
-                        <a href="{{ asset('docs/TdR Resumido_Congresso UniRovuma_página web_30.10.2025.pdf') }}" target="_blank" class="bg-white text-unirovuma-blue font-poppins font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:bg-unirovuma-gold hover:text-unirovuma-blue-dark hover:scale-105 transition-all duration-300">
-                            {{ __('welcome.submit.termo') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         
 
         <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="2">

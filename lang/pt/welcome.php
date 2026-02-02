@@ -3,10 +3,19 @@
 return [
     // Header & Navegação
     'nav' => [
-        'objectives' => 'Objetivos',
-        'themes' => 'Áreas Temáticas',
-        'dates' => 'Datas',
-        'registration' => 'Inscrição',
+        'modalities' => 'Modalidades',
+        'program' => 'Programa',
+        'authors' => [
+            'instruction-a'=>'Instruções para correcção de Resumos',
+            'instruction-b'=>'Instruções para apresentação de comunicações nas sessões paralelas',
+            'instruction-c'=>'Chamada para submissão de resumos',
+            'instruction-d'=>'DESCRIÇÃO DAS ÁREAS TEMÁTICAS',
+            'instruction-e'=>'Instruções aos Autores',
+            'instruction-f'=>'Instruções para submissão na Revista Cientifica da UEM',
+        ],
+        'enrollment' => 'Inscrição',
+        'abstract_books' => 'Livros de resumos',
+        'ebooks' => 'E-Books',
         'login' => 'Iniciar Sessão',
     ],
 

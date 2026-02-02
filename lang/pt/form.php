@@ -14,6 +14,7 @@ return [
         'academic_level' => 'Nível académico',
         'occupation' => 'Ocupação',
         'institution' => 'Instituição e país de proveniência',
+        'country' => 'País de origem',
         'participant_type' => 'Tipo de participante',
         'presentation_modality' => 'Modalidade de apresentação',
         'thematic_axis' => 'Eixo temático da sua apresentação',

@@ -18,11 +18,13 @@ class EnviarEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($nome,$categoria)
+    public function __construct($nome,$categoria,$email,$senha)
     {
         //
          $this->nome = $nome;
          $this->categoria = $categoria;
+         $this->email = $email;
+         $this->senha = $senha;
     }
 
     /**

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->text('full_names'); // Nome(s) completo(s) do(s) autor(es)
             $table->string('academic_level'); // Doutor, Mestre, etc.
             $table->string('occupation'); // Estudante, Docente, etc.
-            $table->string('institution_country'); // Instituição e país
+            $table->string('institution'); // Instituição e país
+            $table->string('country'); // Instituição e país
             $table->string('participant_type'); // Orador ou Ouvinte
 
             // --- Dados Condicionais (Apenas para Oradores, podem ser nulos) ---

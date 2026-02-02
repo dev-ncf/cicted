@@ -14,6 +14,7 @@ return [
         'academic_level' => 'Niveau académique',
         'occupation' => 'Occupation',
         'institution' => 'Institution et pays d\'origine',
+        'country' => 'Country of origin',
         'participant_type' => 'Type de participant',
         'presentation_modality' => 'Modalité de présentation',
         'thematic_axis' => 'Axe thématique de votre présentation',
