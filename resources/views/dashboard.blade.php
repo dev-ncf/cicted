@@ -1,254 +1,349 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin - CICTED UniRovuma</title>
+    <title>Admin - CICTED UniRovuma</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Ícones (Heroicons/FontAwesome) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    },
                     colors: {
-                        'unirovuma-blue': '#0A2D57',
-                        'unirovuma-blue-dark': '#06203E',
-                        'unirovuma-gold': '#F2B900',
+                        'unirovuma': {
+                            900: '#0A2D57',
+                            800: '#0E3A6E',
+                            500: '#1E5BB0',
+                            gold: '#F2B900',
+                        }
                     }
                 }
             }
         }
     </script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
 </head>
-<!-- ALTERAÇÃO 1: Adicionei 'showUserModal: false' ao x-data -->
-<body class="bg-gray-100 font-sans" x-data="{ currentTab: 'dashboard', showModal: false, showUserModal: false, selectedReg: null }">
-    
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased" x-data="{
+    currentTab: 'dashboard',
+    sidebarOpen: false,
+    showUserModal: false,
+    showAreaModal: false,
+    showAbstractModal: false,
+    selectedReg: null
+}">
+
     <div class="flex h-screen overflow-hidden">
-        
-        <!-- BARRA LATERAL (SIDEBAR) -->
-        <aside class="w-64 bg-unirovuma-blue-dark text-white flex-shrink-0 hidden md:flex flex-col">
-            <div class="h-16 flex items-center justify-center border-b border-gray-700">
-                <span class="text-xl font-bold tracking-wider text-unirovuma-gold">CICTED ADMIN</span>
+
+        <!-- OVERLAY MOBILE -->
+        <div x-show="sidebarOpen" @click="sidebarOpen = false" x-cloak
+            class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20 lg:hidden transition-opacity"></div>
+
+        <!-- SIDEBAR -->
+        <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+            class="fixed inset-y-0 left-0 z-30 w-64 bg-unirovuma-900 text-white transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col shadow-2xl">
+
+            <div class="h-20 flex items-center justify-center border-b border-unirovuma-800 bg-unirovuma-900">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-university text-unirovuma-gold text-2xl"></i>
+                    <span class="text-lg font-bold tracking-wide">CICTED <span
+                            class="text-unirovuma-gold">ADMIN</span></span>
+                </div>
             </div>
-            <nav class="flex-1 px-2 py-4 space-y-2">
-                <button @click="currentTab = 'dashboard'" 
-                    :class="{'bg-unirovuma-blue border-l-4 border-unirovuma-gold': currentTab === 'dashboard', 'hover:bg-gray-700': currentTab !== 'dashboard'}"
-                    class="w-full group flex items-center px-2 py-3 text-sm font-medium rounded-r-md transition-colors">
-                    <i class="fas fa-chart-pie mr-3 text-lg"></i> Visão Geral
-                </button>
 
-                <button @click="currentTab = 'registrations'" 
-                    :class="{'bg-unirovuma-blue border-l-4 border-unirovuma-gold': currentTab === 'registrations', 'hover:bg-gray-700': currentTab !== 'registrations'}"
-                    class="w-full group flex items-center px-2 py-3 text-sm font-medium rounded-r-md transition-colors">
-                    <i class="fas fa-users mr-3 text-lg"></i> Inscrições
-                </button>
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+                <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Gestão</p>
 
-                <button @click="currentTab = 'users'" 
-                    :class="{'bg-unirovuma-blue border-l-4 border-unirovuma-gold': currentTab === 'users', 'hover:bg-gray-700': currentTab !== 'users'}"
-                    class="w-full group flex items-center px-2 py-3 text-sm font-medium rounded-r-md transition-colors">
-                    <i class="fas fa-user-shield mr-3 text-lg"></i> Gestão de Utilizadores
-                </button>
+                <!-- Dashboard -->
+                <a href="#" @click.prevent="currentTab = 'dashboard'; sidebarOpen = false"
+                    :class="currentTab === 'dashboard' ? 'bg-unirovuma-800 text-white border-r-4 border-unirovuma-gold' :
+                        'text-gray-300 hover:bg-unirovuma-800'"
+                    class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all">
+                    <i class="fas fa-chart-pie w-6 text-lg text-center"></i>
+                    <span class="ml-3">Dashboard</span>
+                </a>
+
+                <!-- Resumos -->
+                <a href="#" @click.prevent="currentTab = 'registrations'; sidebarOpen = false"
+                    :class="currentTab === 'registrations' ? 'bg-unirovuma-800 text-white border-r-4 border-unirovuma-gold' :
+                        'text-gray-300 hover:bg-unirovuma-800'"
+                    class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all">
+                    <i class="fas fa-layer-group w-6 text-lg text-center"></i>
+                    <span class="ml-3">Todos os Resumos</span>
+                </a>
+
+                <!-- Utilizadores -->
+                <a href="#" @click.prevent="currentTab = 'users'; sidebarOpen = false"
+                    :class="currentTab === 'users' ? 'bg-unirovuma-800 text-white border-r-4 border-unirovuma-gold' :
+                        'text-gray-300 hover:bg-unirovuma-800'"
+                    class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all">
+                    <i class="fas fa-users w-6 text-lg text-center"></i>
+                    <span class="ml-3">Utilizadores</span>
+                </a>
+
+                <!-- Áreas Temáticas (NOVO) -->
+                <a href="#" @click.prevent="currentTab = 'areas'; sidebarOpen = false"
+                    :class="currentTab === 'areas' ? 'bg-unirovuma-800 text-white border-r-4 border-unirovuma-gold' :
+                        'text-gray-300 hover:bg-unirovuma-800'"
+                    class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all">
+                    <i class="fas fa-tags w-6 text-lg text-center"></i>
+                    <span class="ml-3">Áreas Temáticas</span>
+                </a>
             </nav>
-            <div class="p-4 border-t border-gray-700">
+
+            <div class="p-4 border-t border-unirovuma-800 bg-unirovuma-900">
                 <div class="flex items-center">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white text-unirovuma-900 flex items-center justify-center font-bold">
+                        A</div>
                     <div class="ml-3">
-                        <p class="text-sm font-medium text-white">Admin</p>
+                        <p class="text-sm font-medium text-white">Administrador</p>
                         <p class="text-xs text-gray-400">admin@unirovuma.ac.mz</p>
                     </div>
                 </div>
+                <form method="POST" action="{{ route('logout') }}" class="mt-3">
+                    @csrf
+                    <button
+                        class="w-full flex items-center justify-center px-4 py-2 text-xs font-medium text-red-300 bg-unirovuma-800 rounded-md hover:bg-red-900 hover:text-white transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Sair
+                    </button>
+                </form>
             </div>
         </aside>
 
-        <!-- ÁREA PRINCIPAL -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            
-            <header class="bg-white shadow h-16 flex justify-between items-center px-6 z-10">
-                <h2 class="text-xl font-semibold text-gray-800" x-text="currentTab === 'dashboard' ? 'Painel de Controlo' : (currentTab === 'registrations' ? 'Gestão de Inscrições' : 'Gestão de Utilizadores')"></h2>
-                
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-red-600 hover:text-red-800 font-medium text-sm flex items-center gap-2">
-                        <i class="fas fa-sign-out-alt"></i> Sair
-                    </button>
-                </form>
+        <!-- CONTEÚDO -->
+        <div class="flex-1 flex flex-col overflow-hidden relative">
+
+            <!-- Header Mobile -->
+            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-4 lg:hidden z-10">
+                <button @click="sidebarOpen = true" class="text-gray-500"><i class="fas fa-bars text-2xl"></i></button>
+                <span class="font-bold text-unirovuma-900">CICTED Admin</span>
+                <div class="w-6"></div>
             </header>
-                          
 
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                  <!-- Área de Mensagens (Sucesso/Erro) -->
-                <div class="text-center mb-8 md:mb-12">
-                    @if (session('success'))
-                        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-8 rounded-md text-left shadow-sm" role="alert">
-                            <p class="font-bold">Sucesso</p>
-                            <p>{{ session('success') }}</p>
-                        </div>
-                    @endif
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 lg:p-8">
 
-                    @if ($errors->any())
-                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-8 rounded-md text-left shadow-sm" role="alert">
-                            <p class="font-bold">Por favor, corrija os erros abaixo:</p>
-                            <ul class="mt-2 list-disc list-inside text-sm">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                </div>
-                
-                <!-- VISTA 1: DASHBOARD -->
+                <!-- TAB 1: DASHBOARD -->
                 <div x-show="currentTab === 'dashboard'" x-transition:enter="transition ease-out duration-300">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4"> <i class="fas fa-users text-2xl"></i> </div>
-                                <div> <p class="text-sm text-gray-500 font-medium">Total Inscritos</p> <p class="text-2xl font-bold text-gray-800">{{ $stats['total'] ?? 0 }}</p> </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Visão Geral Administrativa</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <!-- Stats Card 1 -->
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium uppercase">Total Utilizadores</p>
+                                <p class="text-3xl font-bold text-gray-800">{{ $users_count ?? 0 }}</p>
+                            </div>
+                            <div class="p-3 bg-blue-50 text-blue-600 rounded-lg"><i class="fas fa-users text-xl"></i>
                             </div>
                         </div>
-                        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4"> <i class="fas fa-microphone text-2xl"></i> </div>
-                                <div> <p class="text-sm text-gray-500 font-medium">Oradores</p> <p class="text-2xl font-bold text-gray-800">{{ $stats['speakers'] ?? 0 }}</p> </div>
+                        <!-- Stats Card 2 -->
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium uppercase">Total Resumos</p>
+                                <p class="text-3xl font-bold text-gray-800">{{ $abstracts_count ?? 0 }}</p>
+                            </div>
+                            <div class="p-3 bg-purple-50 text-purple-600 rounded-lg"><i
+                                    class="fas fa-file-alt text-xl"></i></div>
+                        </div>
+                        <!-- Stats Card 3 -->
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium uppercase">Áreas Temáticas</p>
+                                <p class="text-3xl font-bold text-gray-800">{{ $areas_count ?? 0 }}</p>
+                            </div>
+                            <div class="p-3 bg-green-50 text-green-600 rounded-lg"><i class="fas fa-tags text-xl"></i>
                             </div>
                         </div>
-                        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4"> <i class="fas fa-eye text-2xl"></i> </div>
-                                <div> <p class="text-sm text-gray-500 font-medium">Ouvintes</p> <p class="text-2xl font-bold text-gray-800">{{ $stats['attendees'] ?? 0 }}</p> </div>
+                        <!-- Stats Card 4 -->
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium uppercase">Aguardando Avaliação</p>
+                                <p class="text-3xl font-bold text-gray-800">{{ $pending_count ?? 0 }}</p>
                             </div>
+                            <div class="p-3 bg-yellow-50 text-yellow-600 rounded-lg"><i
+                                    class="fas fa-clock text-xl"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Resumos Recentes (Mini Tabela) -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">Atividade Recente</h3>
+                        <!-- Se não houver dados, mensagem de placeholder -->
+                        <div
+                            class="text-center py-10 text-gray-400 bg-gray-50 rounded-lg border-dashed border-2 border-gray-200">
+                            <i class="fas fa-chart-line text-4xl mb-2 opacity-50"></i>
+                            <p>Os dados de submissão aparecerão aqui.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- VISTA 2: LISTA DE INSCRIÇÕES -->
+                <!-- TAB 2: TODOS OS RESUMOS -->
                 <div x-show="currentTab === 'registrations'" x-transition:enter="transition ease-out duration-300">
-                    <div class="bg-white shadow rounded-lg overflow-hidden">
-                        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                            <h3 class="text-lg font-medium text-gray-900">Registos Recentes</h3>
-                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm flex items-center gap-2">
-                                <i class="fas fa-file-excel"></i> Exportar Excel
-                            </button>
-                        </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Gestão de Resumos</h2>
+                        <button
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 flex items-center shadow">
+                            <i class="fas fa-file-excel mr-2"></i> Exportar Relatório
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div class="overflow-x-auto">
-                            <table class="w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-gray-50 text-gray-500 text-xs uppercase font-semibold">
                                     <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Instituição</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resumo</th>
-                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                        <th class="px-6 py-4">Título / Autor</th>
+                                        <th class="px-6 py-4">Área Temática</th>
+                                        <th class="px-6 py-4">Status</th>
+                                        <th class="px-6 py-4 text-right">Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @if(isset($registrations) && $registrations->count() > 0)
-                                        @foreach ($registrations as $reg)
-                                        <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium text-gray-900">{{ $reg->full_names }}</div>
-                                                <div class="text-sm text-gray-500">{{ $reg->email ?? 'Sem email' }}</div>
+                                <tbody class="divide-y divide-gray-100">
+                                    @forelse($registrations ?? [] as $reg)
+                                        <tr class="hover:bg-gray-50 transition">
+                                            <td class="px-6 py-4">
+                                                <p class="font-semibold text-gray-800 text-sm truncate w-64">
+                                                    {{ $reg->abstract_title }}</p>
+                                                <p class="text-xs text-gray-500">{{ $reg->full_names }}</p>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                @if($reg->participant_type == 'orador')
-                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Orador</span>
-                                                @else
-                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Ouvinte</span>
-                                                @endif
+                                            <td class="px-6 py-4">
+                                                <span
+                                                    class="px-2 py-1 rounded bg-blue-50 text-blue-700 text-xs font-medium border border-blue-100">{{ $reg->thematic->name ?? null }}</span>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $reg->institution_country }}
+                                            <td class="px-6 py-4">
+                                                <!-- Exemplo estático de status -->
+                                                <span
+                                                    class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-bold">Em
+                                                    Análise</span>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                @if($reg->participant_type == 'orador' && $reg->abstract_filepath)
-                                                    <a href="{{ asset($reg->abstract_filepath) }}" target="_blank" class="text-unirovuma-blue hover:text-blue-700 font-semibold flex items-center gap-1">
-                                                        <i class="fas fa-download"></i> Baixar
-                                                    </a>
-                                                @elseif($reg->participant_type == 'orador')
-                                                    <span class="text-red-400 text-xs italic">Pendente</span>
-                                                @else
-                                                    <span class="text-gray-300">-</span>
-                                                @endif
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                                                <button @click="showModal = true; selectedReg = {{ json_encode($reg) }}" class="text-indigo-600 hover:text-indigo-900" title="Ver Detalhes">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <form action="{{ route('registration.destroy', $reg->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Tem certeza que deseja apagar?');">
-                                                    @csrf @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-900" title="Eliminar">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                            <td class="px-6 py-4 text-right space-x-2">
+                                                <button
+                                                    @click="showAbstractModal = true; selectedReg = {{ json_encode($reg) }}"
+                                                    class="text-gray-400 hover:text-unirovuma-500"><i
+                                                        class="fas fa-eye"></i></button>
+                                                <a href="#" class="text-gray-400 hover:text-gray-800"><i
+                                                        class="fas fa-download"></i></a>
+                                                <button class="text-gray-400 hover:text-red-600"><i
+                                                        class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
-                                        @endforeach
-                                    @else
+                                    @empty
                                         <tr>
-                                            <td colspan="5" class="px-6 py-10 text-center text-gray-500 bg-gray-50">
-                                                <div class="flex flex-col items-center justify-center">
-                                                    <i class="fas fa-folder-open text-4xl mb-3 text-gray-300"></i>
-                                                    <p>Sem registos encontrados.</p>
-                                                </div>
+                                            <td colspan="4" class="px-6 py-12 text-center text-gray-400">
+                                                Nenhum resumo encontrado.
                                             </td>
                                         </tr>
-                                    @endif
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
-                        <div class="p-4 bg-white border-t border-gray-200">
-                            {{ $registrations->links() }}
-                        </div>
                     </div>
                 </div>
 
-                <!-- VISTA 3: GESTÃO DE UTILIZADORES -->
+                <!-- TAB 3: UTILIZADORES -->
                 <div x-show="currentTab === 'users'" x-transition:enter="transition ease-out duration-300">
-                    <div class="bg-white shadow rounded-lg p-6">
-                        <div class="flex justify-between mb-4">
-                            <h3 class="text-lg font-medium text-gray-900">Administradores do Sistema</h3>
-                            <!-- ALTERAÇÃO 2: Botão agora ativa showUserModal -->
-                            <button @click="showUserModal = true" class="bg-unirovuma-blue hover:bg-blue-900 text-white px-4 py-2 rounded text-sm transition">
-                                <i class="fas fa-plus mr-1"></i> Adicionar Utilizador
-                            </button>
-                        </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Utilizadores</h2>
+                        <button @click="showUserModal = true"
+                            class="bg-unirovuma-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-800 shadow flex items-center">
+                            <i class="fas fa-user-plus mr-2"></i> Adicionar Utilizador
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="text-gray-500 border-b">
-                                    <th class="py-2">Nome</th>
-                                    <th class="py-2">Email</th>
-                                    <th class="py-2">Data Criação</th>
-                                    <th class="py-2 text-right">Ações</th>
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase font-semibold">
+                                <tr>
+                                    <th class="px-6 py-4">Nome</th>
+                                    <th class="px-6 py-4">Email</th>
+                                    <th class="px-6 py-4">Role</th>
+                                    <th class="px-6 py-4 text-right">Ações</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if(isset($users) && count($users) > 0)
-                                    @foreach($users as $user)
-                                    <tr class="border-b hover:bg-gray-50">
-                                        <td class="py-3 font-medium">{{ $user->name }}</td>
-                                        <td class="py-3 text-gray-600">{{ $user->email }}</td>
-                                        <td class="py-3 text-gray-500">{{ $user->created_at->format('d/m/Y') }}</td>
-                                        <td class="py-3 text-right">
-                                            <button class="text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
+                            <tbody class="divide-y divide-gray-100">
+                                @forelse($users ?? [] as $user)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 font-medium text-gray-800">{{ $user->name }}</td>
+                                        <td class="px-6 py-4 text-gray-500 text-sm">{{ $user->email }}</td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="px-2 py-1 rounded text-xs font-bold bg-gray-100 text-gray-700 uppercase">{{ $user->role->description }}</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button class="text-red-500 hover:text-red-700 text-sm">Remover</button>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                @else
-                                    <tr class="border-b hover:bg-gray-50">
-                                        <td class="py-3 font-medium">Admin Padrão</td>
-                                        <td class="py-3 text-gray-600">admin@unirovuma.ac.mz</td>
-                                        <td class="py-3 text-gray-500">01/10/2023</td>
-                                        <td class="py-3 text-right">
-                                            <span class="text-xs text-gray-400">Sistema</span>
-                                        </td>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-8 text-center text-gray-400">Nenhum
+                                            utilizador registado além de si.</td>
                                     </tr>
-                                @endif
+                                @endforelse
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <!-- TAB 4: ÁREAS TEMÁTICAS (NOVA FUNCIONALIDADE) -->
+                <div x-show="currentTab === 'areas'" x-transition:enter="transition ease-out duration-300">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Áreas Temáticas</h2>
+                        <button @click="showAreaModal = true"
+                            class="bg-unirovuma-gold text-unirovuma-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-yellow-400 shadow flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Nova Área
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Loop de Áreas (Simulado) -->
+                        @forelse($thematic_areas ?? [] as $area)
+                            <div
+                                class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition relative group">
+                                <div class="flex items-start justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-unirovuma-900">{{ $area->name }}</h3>
+                                        <p class="text-xs text-gray-500 mt-1">Criado em:
+                                            {{ $area->created_at->format('d/m/Y') }}</p>
+                                    </div>
+                                    <div class="bg-blue-50 p-2 rounded-lg text-blue-600">
+                                        <i class="fas fa-tag"></i>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-4 pt-4 border-t border-gray-100 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="text-sm text-gray-500 hover:text-blue-600">Editar</button>
+                                    <button class="text-sm text-red-400 hover:text-red-600">Excluir</button>
+                                </div>
+                            </div>
+                        @empty
+                            <div
+                                class="col-span-3 text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+                                <i class="fas fa-tags text-4xl text-gray-300 mb-3"></i>
+                                <p class="text-gray-500">Nenhuma área temática cadastrada.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 
@@ -256,108 +351,140 @@
         </div>
     </div>
 
-    <!-- MODAL 1: DETALHES DA INSCRIÇÃO -->
-    <div x-show="showModal" style="display: none;" class="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="showModal = false"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                            <h3 class="text-xl leading-6 font-medium text-unirovuma-blue" id="modal-title">Detalhes da Inscrição</h3>
-                            <div class="mt-4 border-t border-gray-200 pt-4 grid grid-cols-2 gap-4">
-                                <div> <p class="text-xs text-gray-500 uppercase">Nome</p> <p class="font-medium text-gray-900" x-text="selectedReg?.full_names"></p> </div>
-                                <div> <p class="text-xs text-gray-500 uppercase">Nível Académico</p> <p class="text-gray-900" x-text="selectedReg?.academic_level"></p> </div>
-                                <div> <p class="text-xs text-gray-500 uppercase">Instituição</p> <p class="text-gray-900" x-text="selectedReg?.institution_country"></p> </div>
-                                <div> <p class="text-xs text-gray-500 uppercase">Ocupação</p> <p class="text-gray-900" x-text="selectedReg?.occupation"></p> </div>
-                                <template x-if="selectedReg?.participant_type == 'orador'">
-                                    <div class="col-span-2 bg-blue-50 p-4 rounded-lg mt-2">
-                                        <h4 class="font-bold text-blue-800 mb-2">Dados da Apresentação</h4>
-                                        <div class="grid grid-cols-2 gap-4">
-                                            <div> <p class="text-xs text-gray-500">Eixo Temático</p> <p class="text-sm font-semibold" x-text="selectedReg?.thematic_axis"></p> </div>
-                                            <div> <p class="text-xs text-gray-500">Modalidade</p> <p class="text-sm" x-text="selectedReg?.presentation_modality"></p> </div>
-                                            <div class="col-span-2"> <p class="text-xs text-gray-500">Resumo</p> <p class="text-sm text-gray-700 mt-1" x-text="selectedReg?.abstract_content"></p> </div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
+    <!-- ==================== MODAIS ==================== -->
+    <div x-show="showUserModal || showAreaModal || showAbstractModal"
+        class="fixed inset-0 z-40 bg-gray-900 bg-opacity-60 backdrop-blur-sm" x-cloak></div>
+
+    <!-- 1. MODAL ADICIONAR UTILIZADOR -->
+    <div x-show="showUserModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden"
+            @click.away="showUserModal = false">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800">Novo Utilizador</h3>
+                <button @click="showUserModal = false" class="text-gray-400 hover:text-gray-600"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <form action="{{ route('users.store') }}" method="POST" class="p-6" x-data="{ role_id: 'D' }">
+                @csrf
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome</label>
+                        <input type="text" name="name" required
+                            class="w-full border-gray-300 rounded-lg focus:ring-unirovuma-500 focus:border-unirovuma-500 p-2 border">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                        <input type="email" name="email" required
+                            class="w-full border-gray-300 rounded-lg focus:ring-unirovuma-500 focus:border-unirovuma-500 p-2 border">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Perfil (Role)</label>
+                        <select name="role_id" x-model="role_id"
+                            class="w-full border-gray-300 rounded-lg p-2 border bg-white">
+                            <option value="4">Autor</option>
+                            <option value="3">Avaliador</option>
+                            <option value="2">Diretor de Área</option>
+                            <option value="1">Administrador</option>
+                        </select>
+                    </div>
+
+                    <!-- Seleção de Área Temática (Apenas se for Diretor ou Avaliador) -->
+                    <div x-transition>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Associar a Área
+                            Temática</label>
+                        <select name="thematic_area_id" class="w-full border-gray-300 rounded-lg p-2 border bg-white">
+                            <option value="">Selecione...</option>
+                            @foreach ($thematic_areas ?? [] as $area)
+                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Senha</label>
+                            <input type="password" name="password" required
+                                class="w-full border-gray-300 rounded-lg p-2 border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Confirmar</label>
+                            <input type="password" name="password_confirmation" required
+                                class="w-full border-gray-300 rounded-lg p-2 border">
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <template x-if="selectedReg?.abstract_filepath">
-                        <a :href="'{{ asset('') }}' + selectedReg?.abstract_filepath" target="_blank" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-unirovuma-blue text-base font-medium text-white hover:bg-blue-900 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-                            <i class="fas fa-download mr-2 mt-1"></i> Baixar Ficheiro
-                        </a>
-                    </template>
-                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="showModal = false">Fechar</button>
+                <div class="mt-6 flex justify-end gap-3">
+                    <button type="button" @click="showUserModal = false"
+                        class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Cancelar</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-unirovuma-900 text-white rounded-lg hover:bg-blue-900 shadow">Criar</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <!-- ALTERAÇÃO 3: NOVO MODAL PARA ADICIONAR USUÁRIO -->
-    <div x-show="showUserModal" style="display: none;" class="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <!-- Background overlay -->
-            <div x-show="showUserModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="showUserModal = false"></div>
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <!-- Modal Panel -->
-            <div x-show="showUserModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                
-                <!-- IMPORTANTE: Defina a rota correta do Laravel aqui (ex: route('users.store') ou route('register')) -->
-                <form action="{{ route('users.store') }}" method="POST"> 
-                    @csrf
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                                <h3 class="text-xl leading-6 font-medium text-unirovuma-blue border-b pb-2 mb-4">
-                                    <i class="fas fa-user-plus mr-2"></i>Novo Administrador
-                                </h3>
-                                
-                                <div class="space-y-4">
-                                    <!-- Nome -->
-                                    <div>
-                                        <label for="name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                        <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-unirovuma-blue focus:ring focus:ring-unirovuma-blue focus:ring-opacity-50 border p-2">
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div>
-                                        <label for="email" class="block text-sm font-medium text-gray-700">Email Institucional</label>
-                                        <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-unirovuma-blue focus:ring focus:ring-unirovuma-blue focus:ring-opacity-50 border p-2">
-                                    </div>
-
-                                    <!-- Senha -->
-                                    <div>
-                                        <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-                                        <input type="password" name="password" id="password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-unirovuma-blue focus:ring focus:ring-unirovuma-blue focus:ring-opacity-50 border p-2">
-                                    </div>
-
-                                    <!-- Confirmar Senha -->
-                                    <div>
-                                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
-                                        <input type="password" name="password_confirmation" id="password_confirmation" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-unirovuma-blue focus:ring focus:ring-unirovuma-blue focus:ring-opacity-50 border p-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!-- 2. MODAL ADICIONAR ÁREA TEMÁTICA -->
+    <div x-show="showAreaModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden"
+            @click.away="showAreaModal = false">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800">Nova Área Temática</h3>
+                <button @click="showAreaModal = false" class="text-gray-400 hover:text-gray-600"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <form action="{{ route('thematic_areas.store') }}" method="POST" class="p-6">
+                @csrf
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome da Área</label>
+                        <input type="text" name="name" placeholder="Ex: Educação e Sociedade" required
+                            class="w-full border-gray-300 rounded-lg focus:ring-unirovuma-gold focus:border-unirovuma-gold p-2 border">
                     </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-unirovuma-blue text-base font-medium text-white hover:bg-blue-900 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-                            Criar Utilizador
-                        </button>
-                        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="showUserModal = false">
-                            Cancelar
-                        </button>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Descrição
+                            (Opcional)</label>
+                        <textarea name="description" rows="3" class="w-full border-gray-300 rounded-lg p-2 border"></textarea>
                     </div>
-                </form>
+                </div>
+                <div class="mt-6 flex justify-end gap-3">
+                    <button type="button" @click="showAreaModal = false"
+                        class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Cancelar</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-unirovuma-gold text-unirovuma-900 font-bold rounded-lg hover:bg-yellow-400 shadow">Salvar
+                        Área</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. MODAL VISUALIZAR RESUMO -->
+    <div x-show="showAbstractModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-cloak>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden"
+            @click.away="showAbstractModal = false">
+            <div class="bg-unirovuma-900 px-6 py-4 flex justify-between items-center">
+                <h3 class="text-white font-semibold">Detalhes do Resumo</h3>
+                <button @click="showAbstractModal = false" class="text-gray-300 hover:text-white"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[70vh]">
+                <h2 class="text-xl font-bold text-gray-800 mb-2" x-text="selectedReg?.abstract_title"></h2>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs border border-blue-100"
+                        x-text="selectedReg?.thematic_axis"></span>
+                    <span class="text-gray-400 text-sm">|</span>
+                    <span class="text-gray-600 text-sm" x-text="selectedReg?.full_names"></span>
+                </div>
+                <hr class="border-gray-100 mb-4">
+                <p class="text-gray-700 text-justify leading-relaxed whitespace-pre-line"
+                    x-text="selectedReg?.abstract_content"></p>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+                <button @click="showAbstractModal = false"
+                    class="px-4 py-2 border rounded-lg text-gray-600 hover:bg-white">Fechar</button>
             </div>
         </div>
     </div>
 
 </body>
+
 </html>

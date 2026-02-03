@@ -16,7 +16,7 @@
     <p>Estimado(a)  <strong>pesquisador(a)</strong>,</p>
 
     <p>A Secretaria do <strong>Congresso Internacional de Ciência, Tecnologia e Desenvolvimento (CICTED)</strong>, da <strong>Universidade Rovuma</strong>, recebeu a sua inscrição.</p>
-    <p >Entre na plataforma com seu email e a senginte senha: <strong style="font-size: 24pt">{{$senha}}</strong></p>
+   
          
 
     <div class="info">

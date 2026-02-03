@@ -44,9 +44,16 @@ class EnviarEmail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'email',
-        );
+        if($this->email){
+
+            return new Content(
+                view: 'email',
+            );
+        }else{
+            return new Content(
+                view: 'email2',
+            );
+        }
     }
 
     /**

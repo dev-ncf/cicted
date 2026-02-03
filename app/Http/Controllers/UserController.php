@@ -30,21 +30,28 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        
 
          // Validação dos dados
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:4|confirmed',
+            'thematic_area_id' => 'required|exists:thematic_areas,id',
+            'role_id' => 'required|exists:roles,id',
         ]);
-
+        // dd($request->thematic_area_id);
         // Criação do usuário
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'admin', // se você tiver uma coluna 'role' na tabela
+            'role_id' => $request->role_id, // se você tiver uma coluna 'role' na tabela
         ]);
+
+        $user->thematicAreas()->sync($request->thematic_area_id);
+
+        
 
         // Redireciona com mensagem de sucesso
         return redirect()->back()->with('success', 'Administrador criado com sucesso!');

@@ -27,4 +27,8 @@ class Registration extends Model
         'keywords',
         'abstract_filepath',
     ];
+
+    public function thematic(){
+        return $this->belongsTo(Thematic_area::class,'thematic_axis');
+    }
 }

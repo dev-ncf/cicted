@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Registration; // Não se esqueça de importar o seu Model
 use App\Models\User; // Não se esqueça de importar o seu Model
+use App\Models\Thematic_area; // Não se esqueça de importar o seu Model
 use App\Http\Controllers\Storage;
 
 
@@ -29,10 +30,12 @@ class DashboardController extends Controller
 
         // --- 3. Enviar os Dados para a View ---
         $users = User::all();
+        $thematic_areas = Thematic_area::all();
         return view('dashboard', [
             'stats' => $stats,
             'registrations' => $registrations,
-            'users' => $users
+            'users' => $users,
+            'thematic_areas' => $thematic_areas
         ]);
     }
     public function destroyRegistration($id)

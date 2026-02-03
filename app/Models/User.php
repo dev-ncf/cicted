@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -45,4 +46,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function thematicAreas()
+{
+    return $this->belongsToMany(Thematic_area::class)
+                ->withTimestamps();
+}
+    public function role()
+{
+    return $this->belongsTo(Role::class);
+}
+
 }

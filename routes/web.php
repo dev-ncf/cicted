@@ -60,6 +60,9 @@ Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('lo
 
 // Rota para processar o login
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::post('loagin', [AuthenticatedSessionController::class, 'store'])->name('abstracts.assign');
+Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('abstracts.evaluate');
+Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('thematic_areas.store');
 
 // Rota para fazer logout
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Registration; // Importa o nosso Model
+use App\Models\Submission; // Importa o nosso Model
 use App\Models\User; // Importa o nosso Model
 use Illuminate\Support\Facades\Validator; // Importa a Facade de Validação
  use App\Mail\EnviarEmail;
@@ -74,6 +75,7 @@ class RegistrationController extends Controller
             'email' => 'required|email',
 
             // Campos condicionais para oradores
+            'title' => 'required_if:tipo_participante,orador|string',
             'presentation_modality' => 'required_if:tipo_participante,orador|string|in:mesa_redonda,comunicacao_oral,poster',
             'thematic_axis' => 'required_if:tipo_participante,orador|string|in:1,2,3,4,5,6',
             'abstract_content' => 'required_if:tipo_participante,orador|string|max:5000|nullable',
@@ -112,19 +114,39 @@ class RegistrationController extends Controller
             'keywords' => $validatedData['keywords'] ?? null,
             'abstract_filepath' => $filePath,
         ]);
-        $senha = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
-        $user = User::create([
-            'name'=>$validatedData['full_names'],
-            'email'=>$validatedData['email'],
-        
-            'password'=>bcrypt($senha),
-        ]);
-        Mail::to($validatedData['email'])->send(new EnviarEmail(
-        $validatedData['full_names'],
-        $validatedData['tipo_participante'],
-        $user['email'],
-        $senha,
-    ));
+        if ($validatedData['tipo_participante']=='orador') {
+            # code...
+            $senha = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+            $user = User::create([
+                'name'=>$validatedData['full_names'],
+                'email'=>$validatedData['email'],
+                'role_id'=>'4',
+            
+                'password'=>bcrypt($senha),
+            ]);
+            $submission = Submission::create([
+                'title'=>$validatedData['title'],
+                'abstract'=>$validatedData['abstract_content'],
+                'author_id'=>$user->id,
+                'thematic_area_id'=>$validatedData['thematic_axis'],
+                'status'
+
+            ]);
+            Mail::to($validatedData['email'])->send(new EnviarEmail(
+            $validatedData['full_names'],
+            $validatedData['tipo_participante'],
+            $user['email'],
+            $senha,
+        ));
+        }else{
+            Mail::to($validatedData['email'])->send(new EnviarEmail(
+            $validatedData['full_names'],
+            $validatedData['tipo_participante'],
+            null,
+            'null',
+        ));
+
+        }
         // 4. REDIRECIONAMENTO COM MENSAGEM DE SUCESSO
         return redirect()->back()->with('success', 'Inscrição submetida com sucesso! Um email de confirmacao foi enviado para o endeco fornecido! Obrigado por se juntar a nós.');
     }
