@@ -27,15 +27,17 @@ class DashboardController extends Controller
         // Usamos latest() para mostrar as mais recentes primeiro
         // Usamos paginate(15) para mostrar 15 resultados por página
         $registrations = Registration::latest()->paginate(15);
+        $registration = Registration::first();
 
         // --- 3. Enviar os Dados para a View ---
         $users = User::all();
         $thematic_areas = Thematic_area::all();
-        return view('dashboard', [
+        return view('autor.dashboard', [
             'stats' => $stats,
             'registrations' => $registrations,
             'users' => $users,
-            'thematic_areas' => $thematic_areas
+            'thematic_areas' => $thematic_areas,
+            'registration' => $registration
         ]);
     }
     public function destroyRegistration($id)

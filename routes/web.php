@@ -63,6 +63,7 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 Route::post('loagin', [AuthenticatedSessionController::class, 'store'])->name('abstracts.assign');
 Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('abstracts.evaluate');
 Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('thematic_areas.store');
+Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('submissions.upload_proof');
 
 // Rota para fazer logout
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
