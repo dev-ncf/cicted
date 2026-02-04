@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Registration; // Não se esqueça de importar o seu Model
-use App\Models\User; // Não se esqueça de importar o seu Model
-use App\Models\Thematic_area; // Não se esqueça de importar o seu Model
+use App\Models\Registration; 
+use App\Models\Submission; 
+use App\Models\User; 
+use App\Models\Thematic_area; 
+use App\Models\Comprovativo; 
+use App\Models\Datas; 
 use App\Http\Controllers\Storage;
 
 
@@ -26,18 +29,27 @@ class DashboardController extends Controller
         // --- 2. Obter a Lista de Inscrições ---
         // Usamos latest() para mostrar as mais recentes primeiro
         // Usamos paginate(15) para mostrar 15 resultados por página
+        // dd(auth()->id());
         $registrations = Registration::latest()->paginate(15);
-        $registration = Registration::first();
+        $submission = Submission::where('author_id',auth()->id())->with('thematic')->first();
+        $comprovativo = Comprovativo::where('submission_id',$submission->id??null)->first()??null;
+        $datas = Datas::all();
+        // dd($registration->thematic);
 
         // --- 3. Enviar os Dados para a View ---
         $users = User::all();
+        $user = User::find(auth()->id());
+    
         $thematic_areas = Thematic_area::all();
-        return view('autor.dashboard', [
+        return view('director.dashboard', [
             'stats' => $stats,
             'registrations' => $registrations,
             'users' => $users,
             'thematic_areas' => $thematic_areas,
-            'registration' => $registration
+            'registration' => $submission,
+            'comprovativo' => $comprovativo,
+            'datas' => $datas,
+            'user' => $user,
         ]);
     }
     public function destroyRegistration($id)

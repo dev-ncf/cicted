@@ -13,6 +13,7 @@ return [
             'instruction-e'=>'Instruções aos Autores',
             'instruction-f'=>'Instruções para submissão na Revista Cientifica da UEM',
         ],
+        'dates'=>' Importants Dates',
         'enrollment' => 'Enroolment',
         'abstract_books' => 'Livros de resumos',
         'ebooks' => 'E-Books',
@@ -97,5 +98,15 @@ return [
     'subtitle' => 'Discover the Cultural Center at Rovuma University',
     'paragrafo' => 'The UniRovuma Cultural Center is a cultural space located in the city of Nampula, Mozambique. It is part of Rovuma University and is used for hosting various cultural events, seminars, and other activities.',
 ],
+
+    // ... other existing translations ...
+
+    'countdown' => [
+        'pre_title' => 'The Big Event Starts In',
+        'days' => 'Days',
+        'hours' => 'Hours',
+        'minutes' => 'Min',
+        'seconds' => 'Sec',
+    ],
     
 ];

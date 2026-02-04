@@ -31,4 +31,5 @@ class Registration extends Model
     public function thematic(){
         return $this->belongsTo(Thematic_area::class,'thematic_axis');
     }
+    
 }

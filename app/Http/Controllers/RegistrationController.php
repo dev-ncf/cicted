@@ -67,6 +67,7 @@ class RegistrationController extends Controller
         // 3. Validação
         $validator = Validator::make($request->all(), [
             'full_names' => 'required|string|max:255',
+            'tratamento' => 'required|string|in:Dr.,Dra.,Sr.,Sra.,Prof. Doutora,Prof. Doutor',
             'academic_level' => 'required|string|in:doutor,mestre,licenciado,medio',
             'occupation' => 'required|string|in:estudante_graduacao,estudante_pos_graduacao,docente,investigador',
             'institution' => 'required|string|max:255',
@@ -102,7 +103,7 @@ class RegistrationController extends Controller
         // 3. ARMAZENAMENTO NA BASE DE DADOS
         Registration::create([
             'full_names' => $validatedData['full_names'],
-            // 'email' => $validatedData['email'],
+            'tratamento' => $validatedData['tratamento'],
             'academic_level' => $validatedData['academic_level'],
             'occupation' => $validatedData['occupation'],
             'institution' => $validatedData['institution'],
@@ -129,7 +130,7 @@ class RegistrationController extends Controller
                 'abstract'=>$validatedData['abstract_content'],
                 'author_id'=>$user->id,
                 'thematic_area_id'=>$validatedData['thematic_axis'],
-                'status'
+                
 
             ]);
             Mail::to($validatedData['email'])->send(new EnviarEmail(

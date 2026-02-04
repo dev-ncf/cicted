@@ -484,6 +484,12 @@
             </div>
         </div>
     </div>
+     @if ($errors->any())
+        @include('componentes.error')
+    @endif
+    @if (session('success'))
+        @include('componentes.success')
+    @endif
 
 </body>
 

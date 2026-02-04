@@ -18,9 +18,11 @@ return [
         'participant_type' => 'Type de participant',
         'presentation_modality' => 'Modalité de présentation',
         'thematic_axis' => 'Axe thématique de votre présentation',
+        'title' => 'Title of your presentation',
         'abstract' => 'Résumé de votre présentation (250 à 300 mots)',
         'keywords' => 'Mots-clés (3 à 5 mots)',
         'abstract_submission' => 'Soumettre le résumé simple au format MS Word',
+        'tratamento' => 'Como gostaria de ser tratado(a)?',
     ],
 
     'options' => [
@@ -37,6 +39,14 @@ return [
             'lecturer' => 'Enseignant',
             'researcher' => 'Chercheur',
             'outher' => 'Autre',
+        ],
+        'tratamento' => [
+            'dr' => 'Dr.',
+            'dra' => 'Dra.',
+            'prof' => 'Prof. Doutor',
+            'profa' => 'Prof Doutora',
+            'sr' => 'Sr.',
+            'sra' => 'Sra.',
         ],
         'participant_type' => [
             'speaker' => 'Intervenant',

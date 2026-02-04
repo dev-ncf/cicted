@@ -13,6 +13,7 @@ return [
             'instruction-e'=>'Instruções aos Autores',
             'instruction-f'=>'Instruções para submissão na Revista Cientifica da UEM',
         ],
+        'dates'=>'Datas Importantes',
         'enrollment' => 'Inscrição',
         'abstract_books' => 'Livros de resumos',
         'ebooks' => 'E-Books',
@@ -94,8 +95,17 @@ return [
     ],
     'centro' => [
         'title' => 'Bem vindo ao CECUL',
-        'subtitle' => 'Conheça o Centro Cultural na Rniversidade Rovuma',
+        'subtitle' => 'Conheça o Centro Cultural na Universidade Rovuma',
         'paragrafo' => 'O Centro Cultural da UniRovuma é um espaço cultural localizado na cidade de Nampula, Moçambique. É parte da Universidade Rovuma e é utilizado para a realização de diversos eventos culturais, seminários e outras atividades.',
         
+    ],
+    // ... outras traduções existentes ...
+
+    'countdown' => [
+        'pre_title' => 'O Grande Evento Começa em',
+        'days' => 'Dias',
+        'hours' => 'Horas',
+        'minutes' => 'Min',
+        'seconds' => 'Seg',
     ],
 ];

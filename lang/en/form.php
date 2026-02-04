@@ -18,9 +18,11 @@ return [
         'participant_type' => 'Participant type',
         'presentation_modality' => 'Presentation modality',
         'thematic_axis' => 'Thematic axis of your presentation',
+        'title' => 'Title of your presentation',
         'abstract' => 'Abstract of your presentation (250 to 300 words)',
         'keywords' => 'Keywords (3 to 5 words)',
         'abstract_submission' => 'Submit the simple abstract in MS Word format',
+        'tratamento' => 'Como gostaria de ser tratado(a)?',
     ],
 
     'options' => [
@@ -37,6 +39,14 @@ return [
             'lecturer' => 'Lecturer',
             'researcher' => 'Researcher',
             'outher' => 'Outher',
+        ],
+        'tratamento' => [
+            'dr' => 'Dr.',
+            'dra' => 'Dra.',
+            'prof' => 'Prof. Doutor',
+            'profa' => 'Prof Doutora',
+            'sr' => 'Sr.',
+            'sra' => 'Sra.',
         ],
         'participant_type' => [
             'speaker' => 'Speaker',

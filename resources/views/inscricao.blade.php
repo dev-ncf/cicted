@@ -89,6 +89,52 @@
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                           
+
+                            <fieldset class="bg-gray-50 p-4 rounded-lg">
+                                <legend class="font-poppins font-semibold text-unirovuma-blue-dark mb-3 text-sm md:text-base">{{ __('form.labels.tratamento') }} <span class="text-red-500">*</span></legend>
+                                <div class="space-y-3">
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="tratamento" value="estudante_graduacao" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.dr') }}</span>
+                                    </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="tratamento" value="estudante_graduacao" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.dra') }}</span>
+                                    </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="tratamento" value="estudante_pos_graduacao" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.sr') }}</span>
+                                    </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="tratamento" value="docente" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.sra') }}</span>
+                                    </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="tratamento" value="investigador" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.prof') }}</span>
+                                    </label>
+                                    </label>
+                                    <label class="flex items-start cursor-pointer group">
+                                        <div class="flex items-center h-5">
+                                            <input type="radio" name="tratamento" value="investigador" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                        </div>
+                                        <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.profa') }}</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
                             <fieldset class="bg-gray-50 p-4 rounded-lg">
                                 <legend class="font-poppins font-semibold text-unirovuma-blue-dark mb-3 text-sm md:text-base">{{ __('form.labels.academic_level') }} <span class="text-red-500">*</span></legend>
                                 <div class="space-y-3">
@@ -235,6 +281,10 @@
                                     </label>
                                 </div>
                             </fieldset>
+                            <div>
+                                <label for="title" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.title') }}</label>
+                                <input type="text" id="title" name="title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-unirovuma-gold transition-all">
+                            </div>
 
                             <div>
                                 <label for="resumo" class="block font-poppins font-semibold text-unirovuma-blue-dark mb-2 text-sm md:text-base">{{ __('form.labels.abstract') }}</label>
