@@ -28,13 +28,14 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,Submission $submission)
+    public function store(Request $request)
     {
         //
         // dd(data)
          $data = $request->except('_token');
-          dd($data);
+        //   dd($data);
 
+    $submission = Submission::find($request->registration_id);
     // 📌 CALCULAR TOTAL AUTOMATICAMENTE
     $user = User::find($submission->author_id);
     $data['score_total'] =
@@ -52,9 +53,19 @@ class ReviewController extends Controller
         $data['reviewer_file'] = $file->storeAs('reviews', $filename, 'public');
     }
 
-    Review::create($data);
+   $revisao = Review::create($data);
+   if($revisao){
+    $submission->update([
+        'status'=>$revisao->status,
+    ]);
+       
+       return back()->with('success', 'Avaliação registada!');
+       }else{
 
-    return back()->with('success', 'Avaliação registada!');
+           return back()->withErrors('error', 'Algo deu errado!');
+       }
+
+
     }
 
     /**

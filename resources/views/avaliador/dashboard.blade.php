@@ -92,7 +92,10 @@
             <div class="px-4 py-4 bg-unirovuma-800 border-b border-unirovuma-900">
                 <p class="text-xs text-gray-400 uppercase font-bold">Especialidade</p>
                 <p class="text-sm font-bold text-white mt-1">
-                    <i class="fas fa-bookmark mr-1 text-unirovuma-gold"></i> {{ Auth::user()->thematic_area }}
+                    <i class="fas fa-bookmark mr-1 text-unirovuma-gold"></i> @foreach (Auth::user()->thematicAreas as $key)
+                    {{ $key->name }}
+                        
+                    @endforeach
                 </p>
             </div>
 
@@ -146,13 +149,7 @@
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 lg:p-8">
 
-                <!-- Mensagens -->
-                @if (session('success'))
-                    <div
-                        class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-r shadow-sm text-sm text-green-700 font-medium">
-                        {{ session('success') }}
-                    </div>
-                @endif
+             
 
                 <!-- TAB 1: LISTA DE AVALIAÇÕES PENDENTES -->
                 <div x-show="currentTab === 'assignments'" x-transition:enter="transition ease-out duration-300">
@@ -215,8 +212,86 @@
                     </div>
                 </div>
 
+                <!-- TAB 2: HISTÓRICO DE AVALIAÇÕES (ADICIONADO) -->
+                <div x-show="currentTab === 'history'" x-transition:enter="transition ease-out duration-300">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Histórico de Avaliações</h2>
+                        <button
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm shadow-sm flex items-center">
+                            <i class="fas fa-filter mr-2"></i> Filtrar
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-50 text-gray-500 text-xs uppercase font-semibold">
+                                <tr>
+                                    <th class="px-6 py-4">Título do Resumo</th>
+                                    <th class="px-6 py-4">Data Avaliação</th>
+                                    <th class="px-6 py-4">Sua Decisão</th>
+                                    <th class="px-6 py-4 text-right">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <!-- Nota: Backend deve enviar a variável $history -->
+                                @forelse($avaliacoes ?? [] as $hist)
+                                    <tr class="hover:bg-gray-50 transition group">
+                                        <td class="px-6 py-4">
+                                            <p class="font-bold text-gray-800 text-sm mb-1 line-clamp-2">
+                                                {{ $hist->submission->title }}</p>
+                                            <span class="text-xs text-gray-500">{{ $hist->submission->thematic->name }}</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            {{ $hist->updated_at->format('d/m/Y') }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            @if ($hist->status == 'aceite')
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                                                    <i class="fas fa-check mr-1"></i> Aceite
+                                                </span>
+                                            @elseif($hist->status == 'aceite_com_correcoes')
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
+                                                    <i class="fas fa-pen mr-1"></i> Correções
+                                                </span>
+                                            @elseif($hist->status == 'devolvido')
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-700">
+                                                    <i class="fas fa-times mr-1"></i> Rejeitado
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <!-- Botão para revisar/ver detalhes da avaliação -->
+                                            <button
+                                                @click="showEvaluationModal = true; selectedReg = {{ json_encode($hist->submission) }}"
+                                                class="text-gray-400 hover:text-unirovuma-900 border border-gray-200 hover:border-unirovuma-900 rounded-lg px-3 py-1 text-xs transition">
+                                                Revisar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-12 text-center text-gray-400">
+                                            <div class="flex flex-col items-center">
+                                                <i class="fas fa-history text-4xl mb-3 text-gray-200"></i>
+                                                <p>Ainda não realizou nenhuma avaliação.</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </main>
         </div>
+    </div>
+
+    </main>
+    </div>
     </div>
 
     <!-- ================= MODAL DE AVALIAÇÃO (SPLIT SCREEN) ================= -->
@@ -244,8 +319,8 @@
                     <div class="mb-4">
                         <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Título do
                             Trabalho</span>
-                        <h2 class="text-lg font-bold text-gray-900 leading-snug mt-1"
-                            x-text="selectedReg?.title"></h2>
+                        <h2 class="text-lg font-bold text-gray-900 leading-snug mt-1" x-text="selectedReg?.title">
+                        </h2>
                     </div>
 
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -490,7 +565,7 @@
                                     required>
                                     <option value="">Selecione...</option>
                                     <option value="aceite" class="text-green-600">Aceite (Sem alterações)</option>
-                                    <option value="aceite_correcoes" class="text-blue-600">Aceite com Correções
+                                    <option value="aceite_com_correcoes" class="text-blue-600">Aceite com Correções
                                     </option>
                                     <option value="devolvido" class="text-red-600">Devolvido (Rejeitado)</option>
                                 </select>
@@ -512,6 +587,12 @@
             </div>
         </div>
     </div>
+    @if ($errors->any())
+        @include('componentes.error')
+    @endif
+    @if (session('success'))
+        @include('componentes.success')
+    @endif
 
 </body>
 

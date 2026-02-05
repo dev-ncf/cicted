@@ -8,6 +8,7 @@ use App\Models\Submission;
 use App\Models\User; 
 use App\Models\Thematic_area; 
 use App\Models\Comprovativo; 
+use App\Models\Review; 
 use App\Models\Datas; 
 use App\Http\Controllers\Storage;
 
@@ -29,7 +30,8 @@ class DashboardController extends Controller
         // Usamos latest() para mostrar as mais recentes primeiro
         // Usamos paginate(15) para mostrar 15 resultados por página
         // dd(auth()->id());
-        $registrations = Registration::latest()->paginate(15);
+        $registrations = Submission::latest()->paginate(15);
+        $resumos = Submission::all();
         $submission = Submission::where('author_id',auth()->id())->with('thematic')->first();
         $comprovativo = Comprovativo::where('submission_id',$submission->id??null)->first()??null;
         $datas = Datas::all();
@@ -42,6 +44,7 @@ class DashboardController extends Controller
         $thematic_areas = Thematic_area::all();
         return view('dashboard', [
             'stats' => $stats,
+            'resumos' => $resumos,
             'registrations' => $registrations,
             'users' => $users,
             'thematic_areas' => $thematic_areas,
@@ -112,13 +115,13 @@ class DashboardController extends Controller
         $datas = Datas::all();
         // dd($registration->thematic);
         
-        $submissions = Submission::where('avaliador_id', auth()->id())->get();
+        $submissions = Submission::where('avaliador_id', auth()->id())->where('status','submetido')->get();
         // dd($submissions);
 
         // --- 3. Enviar os Dados para a View ---
         $users = User::all();
         $user = User::find(auth()->id());
-    
+        $avaliacoes= Review::all();
         $thematic_areas = Thematic_area::all();
         return view('avaliador.dashboard', [
             'stats' => $stats,
@@ -126,6 +129,7 @@ class DashboardController extends Controller
             'users' => $users,
             'thematic_areas' => $thematic_areas,
             'registration' => $submission,
+            'avaliacoes' => $avaliacoes,
             'comprovativo' => $comprovativo,
             'datas' => $datas,
             'user' => $user,

@@ -73,6 +73,9 @@ Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('
 Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('thematic_areas.store');
 Route::post('payment', [ComprovativoController::class, 'store'])->name('submissions.upload_proof');
 Route::post('avaliacao', [ReviewController::class, 'store'])->name('evaluations.store');
+Route::post('date-delete', [ReviewController::class, 'store'])->name('dates.destroy');
+Route::post('date-store', [ReviewController::class, 'store'])->name('dates.store');
+Route::post('date-sd', [ReviewController::class, 'store'])->name('thematic_areas.destroy');
 
 Route::put('submission/{submission}', [SubmissionController::class, 'update'])->name('submission.update');
 // Rota para fazer logout
