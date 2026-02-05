@@ -21,7 +21,7 @@
 
     <div class="info">
         
-        <p>📌 Todos os inscritos no CICTED-2026, oradores e participantes sem comunicação devem  efectuar o pagamento de até dia 05/07/2026. </p>
+        <p>📌 Todos os inscritos no CICTED-2026, oradores e participantes sem comunicação devem  efectuar o pagamento de até o dia 05/07/2026. </p>
     </div>
 
  
