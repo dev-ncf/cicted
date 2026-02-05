@@ -96,38 +96,38 @@
                                 <div class="space-y-3">
                                     <label class="flex items-start cursor-pointer group">
                                         <div class="flex items-center h-5">
-                                            <input type="radio" name="tratamento" value="estudante_graduacao" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                            <input type="radio" name="tratamento" value="Dr." class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.dr') }}</span>
                                     </label>
                                     <label class="flex items-start cursor-pointer group">
                                         <div class="flex items-center h-5">
-                                            <input type="radio" name="tratamento" value="estudante_graduacao" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                            <input type="radio" name="tratamento" value="Dra." class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.dra') }}</span>
                                     </label>
                                     <label class="flex items-start cursor-pointer group">
                                         <div class="flex items-center h-5">
-                                            <input type="radio" name="tratamento" value="estudante_pos_graduacao" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                            <input type="radio" name="tratamento" value="Sr." class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.sr') }}</span>
                                     </label>
                                     <label class="flex items-start cursor-pointer group">
                                         <div class="flex items-center h-5">
-                                            <input type="radio" name="tratamento" value="docente" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                            <input type="radio" name="tratamento" value="Sra." class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.sra') }}</span>
                                     </label>
                                     <label class="flex items-start cursor-pointer group">
                                         <div class="flex items-center h-5">
-                                            <input type="radio" name="tratamento" value="investigador" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                            <input type="radio" name="tratamento" value="Prof. Doutor" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.prof') }}</span>
                                     </label>
                                     </label>
                                     <label class="flex items-start cursor-pointer group">
                                         <div class="flex items-center h-5">
-                                            <input type="radio" name="tratamento" value="investigador" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
+                                            <input type="radio" name="tratamento" value="Prof. Doutora" class="h-4 w-4 text-unirovuma-blue focus:ring-unirovuma-gold border-gray-300">
                                         </div>
                                         <span class="ml-3 text-sm md:text-base group-hover:text-unirovuma-blue transition-colors">{{ __('form.options.tratamento.profa') }}</span>
                                     </label>
