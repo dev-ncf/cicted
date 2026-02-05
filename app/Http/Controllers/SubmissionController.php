@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Submission;
 use App\Models\User;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -41,13 +42,52 @@ class SubmissionController extends Controller
     {
         //
     }
+    public function assign(Request $request)
+    {
+        //
+        // dd($request->all());
+      $request->validate([
+        'avaliador_id' => 'required|exists:users,id',
+        'status' => 'required',
+        'prazo' => 'required|date', // opcional
+    ]);
+         $submission = Submission::find($request->submission_id);
+
+       $submission->update([
+        'avaliador_id'=>$request->avaliador_id,
+        'status'=>'em_avaliacao',
+        'prazo'=>$request->prazo,
+       ]);
+       return back()->with('success', 'Atribuição feita com sucesso!');
+
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Submission $submission)
+    public function avaliar(Request $request, Submission $submission)
     {
-        //
+         $data = $request->except('_token');
+
+    // 📌 CALCULAR TOTAL AUTOMATICAMENTE
+    $data['score_total'] =
+        (int)$request->score_intro +
+        (int)$request->score_objectives +
+        (int)$request->score_methodology +
+        (int)$request->score_results +
+        (int)$request->score_conclusions +
+        (int)$request->score_keywords +
+        (int)$request->score_style;
+
+    if ($request->hasFile('reviewer_file')) {
+        $file = $request->file('reviewer_file');
+        $filename = 'review_' . time() . '.' . $file->getClientOriginalExtension();
+        $data['reviewer_file'] = $file->storeAs('reviews', $filename, 'public');
+    }
+
+    \App\Models\Review::create($data);
+
+    return back()->with('success', 'Avaliação registada!');
     }
 
     /**

@@ -633,6 +633,16 @@ namespace App\Models {
     /**
      * App\Models\Datas
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string $descricao
+     * @property string|null $data
+     * @property int $id
+     * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas whereData($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas whereDescricao($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Datas>|Datas query()
@@ -1274,18 +1284,39 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property mixed $decision
-     * @property string|null $comments
-     * @property mixed $score
-     * @property mixed $reviewer_id
-     * @property mixed $submission_id
+     * @property string|null $reviewer_file
+     * @property mixed $status
+     * @property mixed $recommendation_type
+     * @property string|null $feedback
+     * @property mixed $score_total
+     * @property mixed $score_style
+     * @property mixed $score_keywords
+     * @property mixed $score_conclusions
+     * @property mixed $score_results
+     * @property mixed $score_methodology
+     * @property mixed $score_objectives
+     * @property mixed $score_intro
+     * @property bool $content_ok
+     * @property bool $structure_ok
+     * @property mixed $registration_id
      * @property int $id
+     * @property-read \App\Models\Submission $submission
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereSubmissionId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereReviewerId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScore($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereComments($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereDecision($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereRegistrationId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereStructureOk($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereContentOk($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreIntro($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreObjectives($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreMethodology($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreResults($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreConclusions($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreKeywords($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreStyle($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereScoreTotal($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereFeedback($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereRecommendationType($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereReviewerFile($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review newModelQuery()
@@ -1907,19 +1938,27 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property mixed $status
+     * @property string|null $prazo
+     * @property mixed $avaliador_id
      * @property mixed $thematic_area_id
      * @property mixed $author_id
      * @property string|null $abstract_filepath
      * @property string $abstract
+     * @property string $keywords
      * @property string $title
      * @property int $id
      * @property-read \App\Models\Thematic_area $thematic
+     * @property-read \App\Models\User $user
+     * @property-read \App\Models\User $avaliador
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereTitle($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereKeywords($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereAbstract($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereAbstractFilepath($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereAuthorId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereThematicAreaId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereAvaliadorId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission wherePrazo($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Submission>|Submission whereUpdatedAt($value)

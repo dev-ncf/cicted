@@ -130,6 +130,7 @@ class RegistrationController extends Controller
                 'abstract'=>$validatedData['abstract_content'],
                 'author_id'=>$user->id,
                 'thematic_area_id'=>$validatedData['thematic_axis'],
+                'keywords'=>$validatedData['keywords'],
                 
 
             ]);

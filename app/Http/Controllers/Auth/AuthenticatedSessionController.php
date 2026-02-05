@@ -28,8 +28,25 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            if (Auth::user()->role_id==1) {
+                return redirect()->intended('dashboard-admin');
+               
+            }
+            if (Auth::user()->role_id==2) {
+               
+                return redirect()->intended('dashboard-director');
+            }
 
-            return redirect()->intended('dashboard');
+            if (Auth::user()->role_id==3) {
+               
+                return redirect()->intended('dashboard-avaliador');
+            }
+
+            if (Auth::user()->role_id==4) {
+               
+                return redirect()->intended('dashboard-autor');
+            }
+
         }
 
         return back()->withErrors([

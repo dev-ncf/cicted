@@ -7,13 +7,17 @@ use App\Http\Controllers\RegistrationController;
 use App\Models\Datas;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComprovativoController;
 
 Route::middleware(['auth'])->group(function () {
     // Dashboard principal
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard-admin');
+    Route::get('/dashboard-director', [DashboardController::class, 'director'])->name('dashboard-director');
+    Route::get('/dashboard-avaliador', [DashboardController::class, 'avaliador'])->name('dashboard-avaliador');
+    Route::get('/dashboard-autor', [DashboardController::class, 'autor'])->name('dashboard-autor');
     
     // Rotas para Gerir Inscrições (Apagar)
     Route::delete('/registrations/{id}', [DashboardController::class, 'destroyRegistration'])->name('registration.destroy');
@@ -64,10 +68,11 @@ Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('lo
 
 // Rota para processar o login
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
-Route::post('loagin', [AuthenticatedSessionController::class, 'store'])->name('abstracts.assign');
+Route::post('assign', [SubmissionController::class, 'assign'])->name('abstracts.assign');
 Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('abstracts.evaluate');
 Route::post('loagidn', [AuthenticatedSessionController::class, 'store'])->name('thematic_areas.store');
 Route::post('payment', [ComprovativoController::class, 'store'])->name('submissions.upload_proof');
+Route::post('avaliacao', [ReviewController::class, 'store'])->name('evaluations.store');
 
 Route::put('submission/{submission}', [SubmissionController::class, 'update'])->name('submission.update');
 // Rota para fazer logout
