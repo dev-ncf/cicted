@@ -22,6 +22,7 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $locale = $request->get('lang'); // pega ?lang=pt ou default pt
          App::setLocale($locale);
 
@@ -76,7 +77,7 @@ class RegistrationController extends Controller
             'email' => 'required|email',
 
             // Campos condicionais para oradores
-            'title' => 'required_if:tipo_participante,orador|string',
+            'title' => 'required_if:tipo_participante,orador|nullable|string',
             'presentation_modality' => 'required_if:tipo_participante,orador|string|in:mesa_redonda,comunicacao_oral,poster',
             'thematic_axis' => 'required_if:tipo_participante,orador|string|in:1,2,3,4,5,6',
             'abstract_content' => 'required_if:tipo_participante,orador|string|max:5000|nullable',
