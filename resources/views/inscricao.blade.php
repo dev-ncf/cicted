@@ -55,23 +55,6 @@
                 </div>
                 
                 <div class="text-center mb-8 md:mb-12">
-                    @if (session('success'))
-                        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-8 rounded-md text-left shadow-sm" role="alert">
-                            <p class="font-bold">Sucesso</p>
-                            <p>{{ session('success') }}</p>
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-8 rounded-md text-left shadow-sm" role="alert">
-                            <p class="font-bold">Por favor, corrija os erros abaixo:</p>
-                            <ul class="mt-2 list-disc list-inside text-sm">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
                 <div class="bg-white rounded-xl shadow-xl p-6 md:p-12 border-t-4 border-unirovuma-gold">
                     <form action="{{ route('registration.store', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" class="space-y-6 md:space-y-8">
@@ -326,6 +309,12 @@
             <p class="text-gray-400 text-sm md:text-base">{{ __('welcome.footer.copyright') }}</p>
        </div>
     </footer>
+      @if ($errors->any())
+        @include('componentes.error')
+    @endif
+    @if (session('success'))
+        @include('componentes.success')
+    @endif
 
    <script >
         document.addEventListener('DOMContentLoaded', function() {
