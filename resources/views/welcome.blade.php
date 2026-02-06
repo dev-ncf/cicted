@@ -119,12 +119,18 @@
             <div id="mobile-menu"
                 class="hidden lg:hidden mt-4 bg-unirovuma-blue-dark rounded-lg p-4 absolute left-4 right-4 shadow-xl border-t border-gray-700">
                 <div class="flex flex-col space-y-4 text-white font-semibold text-center">
-                    <a href="#objetivos"
-                        class="mobile-link hover:text-unirovuma-gold">{{ __('welcome.nav.objectives') }}</a>
-                    <a href="#temas" class="mobile-link hover:text-unirovuma-gold">{{ __('welcome.nav.themes') }}</a>
-                    <a href="#datas" class="mobile-link hover:text-unirovuma-gold">{{ __('welcome.nav.dates') }}</a>
+                     <a href="#objetivos"
+                        class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.modalities') }}</a>
+                    <a href="#temas"
+                        class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.program') }}</a>
+                    <a href="{{ route('registration.form') }}"
+                        class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.enrollment') }}</a>
+                    <a href="#datas"
+                        class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.abstract_books') }}</a>
+                    <a href="#datas"
+                        class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.ebooks') }}</a>
                     <a href="{{ route('login') }}"
-                        class="mobile-link bg-unirovuma-gold text-unirovuma-blue-dark py-2 rounded-md">{{ __('welcome.nav.login') }}</a>
+                        class="hover:text-unirovuma-gold transition-colors">{{ __('welcome.nav.login') }}</a>
                 </div>
             </div>
         </nav>
