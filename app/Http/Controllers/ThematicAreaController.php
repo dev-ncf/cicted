@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thematic_area;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 
 class ThematicAreaController extends Controller
@@ -13,6 +14,8 @@ class ThematicAreaController extends Controller
     public function index()
     {
         //
+        $resumos= Submission::all();
+         return view('admin.areas',compact('resumos'));
     }
 
     /**

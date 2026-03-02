@@ -29,6 +29,12 @@ return [
         'term' => 'TERMS OF REFERENCE in English',
         'term_pt' => 'TERMES DE RÉFÉRENCE en Portugais',
     ],
+    'prolo' => [
+        'date1' => 'Inscription avec soumission des résumés : Jusqu’au 30 avril 2026.',
+        'date2' => 'Inscription pour les participants : Jusqu’au 5 août 2026.',
+        'title' => 'L’annonce informe de la prolongation des dates limites de participation',
+        'comun' => 'Lire l’annonce'
+    ],
 
     // Objectives Section
     'objectives' => [
@@ -55,13 +61,19 @@ return [
     ],
 
     // Important Dates Section
-    'dates' => [
-        'title' => 'Dates Importantes',
+     'dates' => [
+        'title' => 'Dates importantes',
         'date1' => 'Début de la soumission des résumés',
-        'date2' => 'Date limite pour la soumission des résumés',
+        'date2' => 'Date limite de soumission des résumés',
         'date3' => 'Notification aux auteurs',
-        'date4' => 'Paiement de l\'inscription et envoi des lettres d\'acceptation',
-        'date5' => 'Dates du Congrès',
+        'date4' => 'Date limite de soumission des résumés révisés',
+        'date5' => 'Date limite de paiement de l’inscription avec présentation de travail',
+        'date6' => 'Date limite d’inscription et de paiement des frais de participation (participants)',
+        'date7' => 'Date limite de soumission des articles complets',
+        'date8' => 'Date limite de soumission des versions révisées des travaux complets',
+        'date9' => 'Congrès international de Science, Technologie et Développement',
+        'date10' => 'Congrès international de Science, Technologie et Développement',
+        'date11' => 'Publication du livre du Congrès',
     ],
 
     // Registration Section

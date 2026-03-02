@@ -29,6 +29,13 @@ return [
         'term' => 'TERMS OF REFERENCE in English',
         'term_pt' => 'TERMS OF REFERENCE in Portuguese',
     ],
+    'prolo' => [
+    'date1' => 'Registration with abstract submission: Until April 30, 2026.',
+    'date2' => 'Registration for attendees: Until August 5, 2026.',
+    'title' => 'The announcement informs the extension of the deadlines for participation',
+    'comun' => 'Read the announcement'
+],
+
 
     // Objectives Section
     'objectives' => [
@@ -56,13 +63,20 @@ return [
 
     // Important Dates Section
     'dates' => [
-        'title' => 'Important Dates',
-        'date1' => 'Start of abstract submission',
-        'date2' => 'Final deadline for abstract submission',
-        'date3' => 'Notification to authors',
-        'date4' => 'Registration payment and submission of acceptance letters',
-        'date5' => 'Congress Dates',
-    ],
+    'title' => 'Important Dates',
+    'date1' => 'Start of abstract submission',
+    'date2' => 'Deadline for abstract submission',
+    'date3' => 'Notification to authors',
+    'date4' => 'Deadline for submission of revised abstracts',
+    'date5' => 'Deadline for registration payment with paper presentation',
+    'date6' => 'Deadline for registration and payment of participation fee (attendees)',
+    'date7' => 'Deadline for submission of full papers',
+    'date8' => 'Deadline for submission of revised full papers',
+    'date9' => 'International Congress on Science, Technology and Development',
+    'date10' => 'International Congress on Science, Technology and Development',
+    'date11' => 'Publication of the Congress book',
+],
+
 
     // Registration Section
     'registration' => [
@@ -92,6 +106,7 @@ return [
     'partilhe'  => 'Share Your Science',
     'paragrafo' => 'Researchers, faculty, and students are invited to submit their work in the various thematic areas of the congress.',
     'termo'     => 'Read Terms of Reference',
+    'prolo' =>'Prologamento as inscricoes'
 ],
 'centro' => [
     'title' => 'Welcome to CECUL',

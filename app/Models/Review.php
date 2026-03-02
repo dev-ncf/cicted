@@ -9,6 +9,7 @@ class Review extends Model
     //
      protected $fillable = [
         'registration_id',
+        'valuator_id',
         'structure_ok',
         'content_ok',
         'score_intro',

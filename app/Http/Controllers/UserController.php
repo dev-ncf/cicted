@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash; // ← adicione esta linha
+use Illuminate\Support\Facades\Hash; 
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -14,6 +15,8 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::paginate(5);
+         return view('admin.usuarios',compact('users'));
     }
 
     /**
@@ -48,13 +51,16 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'role_id' => $request->role_id, // se você tiver uma coluna 'role' na tabela
         ]);
+        if($request->role_id!=4){
 
-        $user->thematicAreas()->sync($request->thematic_area_id);
+            $user->thematicAreas()->sync($request->thematic_area_id);
+            
+        }
 
         
 
         // Redireciona com mensagem de sucesso
-        return redirect()->back()->with('success', 'Administrador criado com sucesso!');
+        return redirect()->back()->with('success', 'Usuario criado com sucesso!');
     }
 
     /**
@@ -87,5 +93,35 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+     public function passwordUpdate(Request $request)
+    {
+        // 1. Validação
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'], // Verifica se a senha atual está correta
+            'password' => [
+                'required', 
+                'confirmed', 
+                Password::min(8) // Mínimo 8 caracteres
+                    ->letters()   // Deve ter letras
+                    ->numbers()   // Deve ter números
+                    //->mixedCase() // Letras maiúsculas e minúsculas
+            ],
+        ], [
+            // Mensagens personalizadas (Opcional)
+            'current_password.current_password' => 'A senha atual digitada está incorreta.',
+            'password.confirmed' => 'A confirmação da nova senha não coincide.',
+            'password.min' => 'A nova senha deve ter pelo menos 8 caracteres.',
+        ]);
+
+        // 2. Atualização da Senha
+        $user = $request->user();
+        
+        $user->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        // 3. Retorno com mensagem de sucesso
+        return back()->with('success', 'Senha alterada com sucesso!');
     }
 }

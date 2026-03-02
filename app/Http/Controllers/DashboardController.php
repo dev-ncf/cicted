@@ -38,11 +38,11 @@ class DashboardController extends Controller
         // dd($registration->thematic);
 
         // --- 3. Enviar os Dados para a View ---
-        $users = User::all();
+        $users = User::paginate(3);
         $user = User::find(auth()->id());
     
         $thematic_areas = Thematic_area::all();
-        return view('dashboard', [
+        return view('admin.index', [
             'stats' => $stats,
             'resumos' => $resumos,
             'registrations' => $registrations,
@@ -115,13 +115,13 @@ class DashboardController extends Controller
         $datas = Datas::all();
         // dd($registration->thematic);
         
-        $submissions = Submission::where('avaliador_id', auth()->id())->where('status','submetido')->get();
+        $submissions = Submission::where('avaliador_id', auth()->id())->where('status','em_avaliacao')->get();
         // dd($submissions);
 
         // --- 3. Enviar os Dados para a View ---
         $users = User::all();
         $user = User::find(auth()->id());
-        $avaliacoes= Review::all();
+        $avaliacoes= Review::where('valuetor_id',$user->id)->get();
         $thematic_areas = Thematic_area::all();
         return view('avaliador.dashboard', [
             'stats' => $stats,

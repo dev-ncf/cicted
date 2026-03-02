@@ -13,6 +13,9 @@ class DatasController extends Controller
     public function index()
     {
         //
+         $datas = Datas::paginate(7);
+        // dd($datas);
+         return view('admin.datas',compact('datas'));
     }
 
     /**

@@ -136,12 +136,45 @@
         <section id="hero-carousel" class="relative h-screen min-h-[600px] overflow-hidden group">
 
             <div id="carousel-slides" class="relative h-full w-full">
+                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10"
+                    data-slide="0">
+                    <div class="absolute inset-0 bg-cover bg-center"
+                        style="background-image: url('{{ asset('img/reitoria.jpg') }}');"></div>
+
+                    <div class="absolute inset-0 bg-unirovuma-blue/60"></div>
+
+                    <div class="relative h-full flex items-center justify-center text-center text-white px-6">
+                        <div class="max-w-4xl mx-auto mt-16 md:mt-0">
+                            {{-- <span
+                                class="font-semibold text-unirovuma-gold tracking-widest uppercase text-sm md:text-base animate-fade-in-up">{{ __('welcome.hero.location_date') }}</span> --}}
+                            <h1
+                                class="font-poppins text-3xl md:text-6xl font-extrabold tracking-tight uppercase mt-4 mb-6 leading-tight animate-fade-in-up delay-100">
+                                {{ __('welcome.prolo.title') }}
+                            </h1>
+                            <p
+                                class="text-lg md:text-2xl font-light italic text-gray-200 mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200">
+                                {{ __('welcome.prolo.date1') }}
+                            </p>
+                            <p
+                                class="text-lg md:text-2xl font-light italic text-gray-200 mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200">
+                                {{ __('welcome.prolo.date2') }}
+                            </p>
+                            <div class="flex flex-col md:flex-row gap-4 justify-center animate-fade-in-up delay-300">
+                                <a href="{{ asset('docs/CamScanner 10-02-2026 15.48.pdf')}}"
+                                    class="bg-unirovuma-gold text-unirovuma-blue-dark font-poppins font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:bg-white hover:scale-105 transition-all duration-300">
+                                    {{ __('welcome.prolo.comun') }}
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0" data-slide="1">
                     <div class="absolute inset-0 bg-cover bg-center"
                         style="background-image: url('{{ asset('img/campus_napipine.jpg') }}');"></div>
-                    <div class="absolute inset-0 bg-unirovuma-blue-dark/50"></div>
+                        <div class="absolute inset-0 bg-unirovuma-blue-dark/50"></div>
 
-                    <div class="relative h-full flex items-center justify-center text-center text-white px-6">
+                        <div class="relative h-full flex items-center justify-center text-center text-white px-6">
                         <div class="max-w-4xl mx-auto mt-16 md:mt-0">
                             <span
                                 class="font-semibold text-unirovuma-gold tracking-widest uppercase text-sm md:text-base">
@@ -382,6 +415,9 @@
                 <h2 class="font-poppins text-2xl md:text-4xl font-bold text-unirovuma-blue mb-12 text-center">
                     {{ __('welcome.dates.title') }}</h2>
                 <div class="relative border-l-2 border-gray-200 ml-4 md:ml-6 space-y-10">
+                    @php
+                        $count =1;
+                    @endphp
                     @foreach ($datas as $data)
                         <div class="pl-8 relative group">
                             <div
@@ -389,8 +425,14 @@
                             </div>
                             <p class="font-poppins font-bold text-unirovuma-blue-dark text-lg md:text-xl">
                                 {{ $data->data ?? null }}</p>
-                            <p class="text-gray-600 mt-1">{{ $data->descricao }}</p>
+                                @php
+                                    $datal = 'date'.$count;
+                                @endphp
+                            <p class="text-gray-600 mt-1">{{ __('welcome.dates.'.$datal) }}</p>
                         </div>
+                        @php
+                            $count +=1;
+                        @endphp
                     @endforeach
 
                 </div>

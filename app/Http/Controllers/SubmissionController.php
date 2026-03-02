@@ -17,6 +17,8 @@ class SubmissionController extends Controller
     public function index()
     {
         //
+        $resumos = Submission::paginate(6);
+         return view('admin.resumos',compact('resumos'));
     }
 
     /**
@@ -48,7 +50,6 @@ class SubmissionController extends Controller
         // dd($request->all());
       $request->validate([
         'avaliador_id' => 'required|exists:users,id',
-        'status' => 'required',
         'prazo' => 'required|date', // opcional
     ]);
          $submission = Submission::find($request->submission_id);

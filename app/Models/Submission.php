@@ -10,6 +10,7 @@ class Submission extends Model
     protected $fillable = [
         'title',
         'abstract',
+        'abstract_filepath',
         'author_id',
         'thematic_area_id',
         'status',

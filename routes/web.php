@@ -11,6 +11,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComprovativoController;
+use App\Http\Controllers\DatasController;
+use App\Http\Controllers\ThematicAreaController;
 
 Route::middleware(['auth'])->group(function () {
     // Dashboard principal
@@ -80,5 +82,12 @@ Route::post('date-sd', [ReviewController::class, 'store'])->name('thematic_areas
 Route::put('submission/{submission}', [SubmissionController::class, 'update'])->name('submission.update');
 // Rota para fazer logout
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::put('passUpdate', [UserController::class, 'passwordUpdate'])->name('password.update');
+Route::get('usuarios', [UserController::class, 'index'])->name('admin.users');
+Route::get('datas', [DatasController::class, 'index'])->name('admin.datas');
+Route::get('areas', [ThematicAreaController::class, 'index'])->name('admin.areas');
+Route::get('resumos', [SubmissionController::class, 'index'])->name('admin.resumos');
+Route::get('comprovatvos', [ComprovativoController::class, 'index'])->name('admin.comprovativos');
+// Route::get('comprovativos', [ComprovativoController::class, 'index'])->name('admin.comprovativos');
 
 // Rota do Dashboard PROTEGIDA

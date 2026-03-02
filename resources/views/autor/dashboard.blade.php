@@ -45,6 +45,7 @@
     showEditModal: false,
     showPaymentModal: false,
     showCorrectionsModal: false,
+    showPasswordModal: false, 
     reg: {{ $registration ?? null }},
 }">
 
@@ -75,24 +76,30 @@
                 </a>
             </nav>
 
-            <div class="p-4 border-t border-gray-100">
-                <div class="flex items-center mb-4">
-                    <div
-                        class="w-10 h-10 rounded-full bg-unirovuma-900 text-white flex items-center justify-center font-bold">
-                        {{ substr(Auth::user()->name, 0, 1) }}
-                    </div>
-                    <div class="ml-3 overflow-hidden">
-                        <p class="text-sm font-bold text-gray-800 truncate">{{ Auth::user()->name }}</p>
-                    </div>
+            <!-- Dentro da div da sidebar (p-4 border-t border-gray-100) -->
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-unirovuma-900 text-white flex items-center justify-center font-bold">
+                    {{ substr(Auth::user()->name, 0, 1) }}
                 </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button
-                        class="w-full flex items-center justify-center px-4 py-2 text-xs font-bold text-red-500 border border-red-100 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Sair
-                    </button>
-                </form>
+                <div class="ml-3 overflow-hidden">
+                    <p class="text-sm font-bold text-gray-800 truncate">{{ Auth::user()->name }}</p>
+                </div>
             </div>
+            
+            <!-- NOVO BOTÃO DE ALTERAR SENHA -->
+            <button @click="showPasswordModal = true"
+                class="w-full flex items-center justify-center px-4 py-2 mb-2 text-xs font-bold text-unirovuma-900 border border-gray-200 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <i class="fas fa-key mr-2"></i> Alterar Senha
+            </button>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="w-full flex items-center justify-center px-4 py-2 text-xs font-bold text-red-500 border border-red-100 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Sair
+                </button>
+            </form>
+        </div>
         </aside>
 
         <!-- CONTEÚDO PRINCIPAL -->
@@ -481,6 +488,67 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- MODAL ALTERAR SENHA -->
+    <div x-show="showPasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-cloak>
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm" @click="showPasswordModal = false"></div>
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden z-10 relative">
+            <div class="bg-unirovuma-900 px-6 py-4 flex justify-between items-center">
+                <h3 class="text-white font-bold text-lg"><i class="fas fa-lock mr-2"></i>Alterar Minha Senha</h3>
+                <button @click="showPasswordModal = false" class="text-gray-300 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+
+            <form action="{{ route('password.update') }}" method="POST" class="p-6">
+                @csrf
+                @method('PUT')
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Senha Atual</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                <i class="fas fa-shield-alt"></i>
+                            </span>
+                            <input type="password" name="current_password" required
+                                class="w-full border-gray-300 rounded-lg p-2.5 pl-10 border focus:ring-2 focus:ring-unirovuma-900 outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nova Senha</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                <i class="fas fa-key"></i>
+                            </span>
+                            <input type="password" name="password" required
+                                class="w-full border-gray-300 rounded-lg p-2.5 pl-10 border focus:ring-2 focus:ring-unirovuma-900 outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Confirmar Nova Senha</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                <i class="fas fa-check-double"></i>
+                            </span>
+                            <input type="password" name="password_confirmation" required
+                                class="w-full border-gray-300 rounded-lg p-2.5 pl-10 border focus:ring-2 focus:ring-unirovuma-900 outline-none text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end gap-3">
+                    <button type="button" @click="showPasswordModal = false"
+                        class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm font-medium transition">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 bg-unirovuma-gold text-unirovuma-900 font-bold rounded-lg hover:bg-yellow-500 shadow transition text-sm">
+                        Atualizar Senha
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     @if ($errors->any())

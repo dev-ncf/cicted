@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -52,6 +53,7 @@ class ReviewController extends Controller
         $filename = 'review_' . $user->name. '.' . $file->getClientOriginalExtension();
         $data['reviewer_file'] = $file->storeAs('reviews', $filename, 'public');
     }
+    $data['valuator_id']=Auth::user()->id;
 
    $revisao = Review::create($data);
    if($revisao){

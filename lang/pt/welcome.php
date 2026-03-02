@@ -29,6 +29,13 @@ return [
         'term' => 'TERMOS DE REFERÊNCIA em Inglês',
         'term_pt' => 'TERMOS DE REFERÊNCIA em Português',
     ],
+    'prolo' => [
+        'date1' => 'Inscrição com apresentação de resumos: Até 30 de abril de 2026.',
+        'date2' => 'Inscrição para ouvintes: Até 05 de agosto de 2026.',
+        'title' => 'O comunicado informa a prorrogação das datas limites para participação',
+        'comun'=>'Ler o comunicado'
+    ],
+
 
     // Secção de Objetivos
     'objectives' => [
@@ -55,14 +62,22 @@ return [
     ],
 
     // Secção de Datas Importantes
-    'dates' => [
+        'dates' => [
         'title' => 'Datas Importantes',
-        'date1' => 'Início de submissão de resumos',
+        'date1' => 'Início da submissão de resumos',
         'date2' => 'Prazo final para a submissão de resumos',
         'date3' => 'Notificação aos autores',
-        'date4' => 'Pagamento da inscrição e envio das cartas de aceitação',
-        'date5' => 'Realização do Congresso',
+        'date4' => 'Prazo final para a submissão da versão revista dos resumos',
+        'date5' => 'Data limite para pagamento da inscrição com apresentação de trabalho',
+        'date6' => 'Data limite para inscrição e pagamento da taxa de participação (ouvintes)',
+        'date7' => 'Prazo final para a submissão de artigos (textos completos das comunicações)',
+        'date8' => 'Data limite para a submissão da versão revista dos trabalhos completos',
+        'date9' => 'Realização do Congresso Internacional de Ciência, Tecnologia e Desenvolvimento',
+        'date10' => 'Realização do Congresso Internacional de Ciência, Tecnologia e Desenvolvimento',
+        'date11' => 'Publicação do livro do Congresso',
     ],
+
+
 
     // Secção de Inscrição
     'registration' => [

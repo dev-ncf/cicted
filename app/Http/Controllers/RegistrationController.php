@@ -98,7 +98,11 @@ class RegistrationController extends Controller
         // 2. TRATAMENTO DO UPLOAD DO FICHEIRO
         if ($request->hasFile('resumo_file')) {
             // Armazena o ficheiro em 'storage/app/public/abstracts' e obtém o caminho
-            $filePath = $request->file('resumo_file')->store('abstracts', 'public');
+            $file = $request->file('resumo_file');
+
+            $newName = 'resumo_' .$validatedData['full_names']. '.' . $file->getClientOriginalExtension();
+
+            $filePath = $file->storeAs('abstracts', $newName, 'public');
         }
 
         // 3. ARMAZENAMENTO NA BASE DE DADOS
@@ -129,6 +133,7 @@ class RegistrationController extends Controller
             $submission = Submission::create([
                 'title'=>$validatedData['title'],
                 'abstract'=>$validatedData['abstract_content'],
+                'abstract_filepath'=>$filePath,
                 'author_id'=>$user->id,
                 'thematic_area_id'=>$validatedData['thematic_axis'],
                 'keywords'=>$validatedData['keywords'],

@@ -15,6 +15,8 @@ class ComprovativoController extends Controller
     public function index()
     {
         //
+        $comprovativos = Comprovativo::paginate(7);
+        return view('admin.comprovativos',compact('comprovativos'));
     }
 
     /**
