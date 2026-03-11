@@ -239,7 +239,7 @@
                                             Temática</label>
                                         <p
                                             class="text-gray-800 font-medium bg-gray-50 p-2 rounded border border-gray-100 inline-block">
-                                            {{ $registration->thematic->name }}</p>
+                                            {{ $registration->thematic->name ??null}}</p>
                                     </div>
                                     <div>
                                         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Data de
