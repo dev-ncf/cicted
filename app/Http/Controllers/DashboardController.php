@@ -121,7 +121,7 @@ class DashboardController extends Controller
         // --- 3. Enviar os Dados para a View ---
         $users = User::all();
         $user = User::find(auth()->id());
-        $avaliacoes= Review::where('valuetor_id',$user->id)->get();
+        $avaliacoes= Review::where('valuator_id',$user->id)->get();
         $thematic_areas = Thematic_area::all();
         return view('avaliador.dashboard', [
             'stats' => $stats,

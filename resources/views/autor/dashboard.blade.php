@@ -79,11 +79,11 @@
             <!-- Dentro da div da sidebar (p-4 border-t border-gray-100) -->
         <div class="p-4 border-t border-gray-100">
             <div class="flex items-center mb-4">
-                <div class="w-10 h-10 rounded-full bg-unirovuma-900 text-white flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-full border-2 bg-unirovuma-900 text-white flex items-center justify-center font-bold">
                     {{ substr(Auth::user()->name, 0, 1) }}
                 </div>
                 <div class="ml-3 overflow-hidden">
-                    <p class="text-sm font-bold text-gray-800 truncate">{{ Auth::user()->name }}</p>
+                    <p class="text-sm font-bold text-gray-400 truncate">{{ Auth::user()->name }}</p>
                 </div>
             </div>
             
